@@ -15,7 +15,7 @@ public class SessionController {
 
 
     @ApiOperation(value = "Used to login",
-        notes = "Checks whether the supplied username and password match. If so, in the session data the user id is set. " +
+        notes = "Checks whether the supplied username and password match. If so, in the session data the customer id is set. " +
                 "A 200 is returned if login was successful, 403 is returned if login failed. Furthermore a cookie with " +
                 "a JSESSIONID field is set on the client side. ")
     @ApiResponses(value = {
@@ -25,7 +25,7 @@ public class SessionController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody LoginCommand loginCommand){
-
+        //TODO implement this
     }
 
     @ApiOperation(value = "Used to logout",
