@@ -3,9 +3,11 @@ package com.bank.controller;
 import com.bank.bean.CustomerBean;
 import com.bank.command.customer.CustomerCreateCommand;
 import com.bank.command.customer.CustomerDeleteCommand;
+import com.bank.service.CustomerCreateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/rest/customer")
 public class CustomerController {
 
+    @Autowired
+    private CustomerCreateService customerCreateService;
 
     @ApiOperation(value = "Used for creating a new customer",
         notes = "Adds the given user to the database.")
@@ -23,8 +27,9 @@ public class CustomerController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void createCustomer(HttpSession session, @RequestBody CustomerCreateCommand customerCreateCommand){
-        //TODO implement this
+    public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean){
+        System.out.println("lfdsaj");
+        customerCreateService.createCustomer(customerBean);
     }
 
     @ApiOperation(value = "Used to get a customer",
