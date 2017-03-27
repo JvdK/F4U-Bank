@@ -28,7 +28,6 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
     public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean){
-        System.out.println("lfdsaj");
         customerCreateService.createCustomer(customerBean);
     }
 
