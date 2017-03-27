@@ -37,12 +37,27 @@ public class CustomerController {
         return null;
     }
 
+    @ApiOperation(value = "Used to update a customer",
+        notes = "Used to update a given customer. The fields will be overwritten. Fields not supplied will be set to null.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "User successfully updated")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public void updateCustomer(HttpSession session){
-
+        //TODO implement this
     }
 
-    public void deleteCustomer(HttpSession session){
-
+    @ApiOperation(value = "Used to remove a customer",
+        notes = "This does not really deletes the user, but sets the user to inactive. This keeps all the records linked " +
+                "to this customer intact.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "User successfully removed")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/{customerId}", method = RequestMethod.DELETE)
+    public void deleteCustomer(HttpSession session, @PathVariable int customerId){
+        //TODO implement this
     }
 
 
