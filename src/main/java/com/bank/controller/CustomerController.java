@@ -1,6 +1,8 @@
 package com.bank.controller;
 
 import com.bank.bean.CustomerBean;
+import com.bank.command.customer.CustomerCreateCommand;
+import com.bank.command.customer.CustomerDeleteCommand;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -15,13 +17,13 @@ public class CustomerController {
 
 
     @ApiOperation(value = "Used for creating a new customer",
-        notes = "Adds the given user to the database. The given id is ignored and the database generates its own id.")
+        notes = "Adds the given user to the database.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Customer successfully added")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean){
+    public void createCustomer(HttpSession session, @RequestBody CustomerCreateCommand customerCreateCommand){
         //TODO implement this
     }
 
@@ -55,8 +57,8 @@ public class CustomerController {
             @ApiResponse(code = 200, message = "User successfully removed")
     })
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{customerId}", method = RequestMethod.DELETE)
-    public void deleteCustomer(HttpSession session, @PathVariable int customerId){
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteCustomer(HttpSession session, @RequestBody CustomerDeleteCommand customerDeleteCommand){
         //TODO implement this
     }
 

@@ -1,20 +1,14 @@
-package com.bank.bean;
+package com.bank.command.customer;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
 import java.sql.Date;
 
-@Entity
-@Table(name = "customer")
-public class CustomerBean {
-    @Id
-    @Column(name = "customer_id")
-    private int customerId;
+public class CustomerCreateCommand {
+
     @Column(name = "user_name")
     private String userName;
     @Column(name = "first_name")
+    private String password;
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
@@ -22,7 +16,6 @@ public class CustomerBean {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
     @Column(name = "date_of_creation")
-    private Date dateOfCreation;
     private String address;
     private String phone;
     @Column(name = "postal_code")
@@ -31,13 +24,6 @@ public class CustomerBean {
     private String country;
     private String email;
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 
     public String getUserName() {
         return userName;
@@ -45,6 +31,14 @@ public class CustomerBean {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -77,14 +71,6 @@ public class CustomerBean {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public String getAddress() {
