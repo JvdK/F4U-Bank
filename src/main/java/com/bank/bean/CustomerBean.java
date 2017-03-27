@@ -1,13 +1,16 @@
 package com.bank.bean;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
+@Table(name = "customer")
 public class CustomerBean {
-
+    @Id
     @Column(name = "customer_id")
     private int customerId;
     @Column(name = "user_name")
