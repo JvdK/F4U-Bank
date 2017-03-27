@@ -1,10 +1,10 @@
 package com.bank.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import java.sql.Date;
+import com.sun.istack.internal.NotNull;
+
+import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "customer")
@@ -12,23 +12,37 @@ public class CustomerBean {
     @Id
     @Column(name = "customer_id")
     private int customerId;
+
     @Column(name = "user_name")
     private String userName;
+
+    private String password;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     private String initials;
+
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
     @Column(name = "date_of_creation")
     private Date dateOfCreation;
+
     private String address;
+
     private String phone;
+
     @Column(name = "postal_code")
     private String postalCode;
+
     private String city;
+
     private String country;
+
     private String email;
 
     public int getCustomerId() {
@@ -133,5 +147,18 @@ public class CustomerBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @PrePersist
+    void dateOfCreation() {
+        this.dateOfCreation = new Date();
     }
 }
