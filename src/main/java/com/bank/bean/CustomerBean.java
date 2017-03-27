@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
@@ -12,6 +13,8 @@ public class CustomerBean {
     @Id
     @Column(name = "customer_id")
     private int customerId;
+    @Column(name = "user_name")
+    private String userName;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -35,6 +38,14 @@ public class CustomerBean {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
