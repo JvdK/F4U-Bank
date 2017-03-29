@@ -1,4 +1,4 @@
-package com.bank.command;
+package com.bank.command.session;
 
 public class LoginCommand {
 

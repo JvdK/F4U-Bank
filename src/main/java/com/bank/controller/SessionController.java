@@ -1,9 +1,9 @@
 package com.bank.controller;
 
-import com.bank.command.LoginCommand;
+import com.bank.command.session.LoginCommand;
 import com.bank.constant.SessionConstant;
 import com.bank.exception.AuthenticationException;
-import com.bank.service.SessionLoginService;
+import com.bank.service.session.SessionLoginService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

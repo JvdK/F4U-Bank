@@ -1,6 +1,6 @@
 package com.bank.repository;
 
-import com.bank.bean.LoginBean;
+import com.bank.bean.session.LoginBean;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,7 +1,6 @@
-package com.bank.service;
+package com.bank.service.customer;
 
-import com.bank.bean.CustomerBean;
-import com.bank.command.customer.CustomerCreateCommand;
+import com.bank.bean.session.customer.CustomerBean;
 import com.bank.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
