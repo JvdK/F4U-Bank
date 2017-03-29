@@ -21,9 +21,9 @@ public class SessionController {
     private SessionLoginService sessionLoginService;
 
     @ApiOperation(value = "Used to login",
-        notes = "Checks whether the supplied username and password match. If so, in the session data the customer id is set. " +
-                "A 200 is returned if login was successful, 403 is returned if login failed. Furthermore a cookie with " +
-                "a JSESSIONID field is set on the client side. ")
+            notes = "Checks whether the supplied username and password match. If so, in the session data the customer id is set. " +
+                    "A 200 is returned if login was successful, 403 is returned if login failed. Furthermore a cookie with " +
+                    "a JSESSIONID field is set on the client side. ")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Login successful"),
             @ApiResponse(code = 403, message = "Login failed")
@@ -32,11 +32,11 @@ public class SessionController {
     @RequestMapping(method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody LoginCommand loginCommand) throws AuthenticationException {
         int customerId = sessionLoginService.checkLogin(loginCommand.getUsername(), loginCommand.getPassword());
-        if(customerId!=-1){
+        if (customerId != -1) {
             session.setAttribute(SessionConstant.LOGIN, true);
             session.setAttribute(SessionConstant.CUSTOMER_ID, customerId);
             System.out.println("login successfull");
-        }else{
+        } else {
             throw new AuthenticationException("Customer name or password do not correspond");
         }
 
@@ -45,11 +45,11 @@ public class SessionController {
 
     @ApiOperation(value = "Used to logout",
             notes = "Invalidates the session if it exists. It also removes the cookie with the session id at the client side")
-    @ApiResponse(code=200, message = "Successfully logged out")
+    @ApiResponse(code = 200, message = "Successfully logged out")
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
-    public void logout(HttpSession session){
-        if(session != null) {
+    public void logout(HttpSession session) {
+        if (session != null) {
             session.invalidate();
         }
     }

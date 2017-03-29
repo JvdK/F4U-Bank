@@ -1,6 +1,4 @@
-package com.bank.bean.session.customer;
-
-import com.sun.istack.internal.NotNull;
+package com.bank.customer;
 
 import javax.persistence.*;
 import java.util.Date;
