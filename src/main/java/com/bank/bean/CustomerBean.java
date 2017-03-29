@@ -10,10 +10,10 @@ import java.util.Date;
 @Table(name = "customer")
 public class CustomerBean {
     @Id
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", insertable = false)
     private int customerId;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
     private String password;
