@@ -1,6 +1,6 @@
-package com.bank.service;
+package com.bank.service.session;
 
-import com.bank.bean.LoginBean;
+import com.bank.bean.session.LoginBean;
 import com.bank.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

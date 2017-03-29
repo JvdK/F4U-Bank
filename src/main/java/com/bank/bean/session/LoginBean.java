@@ -1,4 +1,4 @@
-package com.bank.bean;
+package com.bank.bean.session;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

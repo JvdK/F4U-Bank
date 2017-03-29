@@ -1,4 +1,4 @@
-package com.bank.bean;
+package com.bank.bean.session.customer;
 
 import com.sun.istack.internal.NotNull;
 
