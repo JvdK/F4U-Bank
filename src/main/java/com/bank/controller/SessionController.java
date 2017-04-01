@@ -35,7 +35,6 @@ public class SessionController {
         if (customerId != -1) {
             session.setAttribute(SessionConstant.LOGIN, true);
             session.setAttribute(SessionConstant.CUSTOMER_ID, customerId);
-            System.out.println("login successfull");
         } else {
             throw new AuthenticationException("Customer name or password do not correspond");
         }
