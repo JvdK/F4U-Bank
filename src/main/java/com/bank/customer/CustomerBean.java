@@ -1,5 +1,7 @@
 package com.bank.customer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,7 +9,9 @@ import java.util.Date;
 @Entity
 @Table(name = "customer")
 public class CustomerBean {
+
     @Id
+    @JsonIgnore
     @Column(name = "customer_id", insertable = false)
     private int customerId;
 
@@ -27,6 +31,7 @@ public class CustomerBean {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
+    @JsonIgnore
     @Column(name = "date_of_creation")
     private Date dateOfCreation;
 
