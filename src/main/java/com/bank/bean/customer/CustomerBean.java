@@ -1,4 +1,4 @@
-package com.bank.customer;
+package com.bank.bean.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

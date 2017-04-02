@@ -1,6 +1,6 @@
 package com.bank.service.customer;
 
-import com.bank.customer.CustomerBean;
+import com.bank.bean.customer.CustomerBean;
 import com.bank.exception.BadRequestException;
 import com.bank.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
