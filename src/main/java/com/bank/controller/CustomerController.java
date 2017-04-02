@@ -45,7 +45,6 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
     public CustomerDetailsProjection getCustomer(HttpSession session, @PathVariable int customerId) {
-        //TODO implement this
         return customerGetService.getCustomerById(customerId);
     }
 
