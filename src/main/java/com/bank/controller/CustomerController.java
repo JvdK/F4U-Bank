@@ -1,6 +1,6 @@
 package com.bank.controller;
 
-import com.bank.customer.CustomerBean;
+import com.bank.bean.customer.CustomerBean;
 import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.service.customer.CustomerCreateService;
