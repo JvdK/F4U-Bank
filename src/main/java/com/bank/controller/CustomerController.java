@@ -59,7 +59,6 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     public CustomerDetailsProjection getLoggedInCustomer(HttpSession session) throws NotLoggedInException {
-        System.out.println("kdsajlfjfdsal;fdsa");
         if(session.getAttribute(SessionConstant.CUSTOMER_ID) != null) {
             return customerGetService.getCustomerById((Integer) session.getAttribute(SessionConstant.CUSTOMER_ID));
         }else{
