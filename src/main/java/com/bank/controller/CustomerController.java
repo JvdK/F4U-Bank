@@ -2,6 +2,7 @@ package com.bank.controller;
 
 import com.bank.customer.CustomerBean;
 import com.bank.command.customer.CustomerDeleteCommand;
+import com.bank.exception.BadRequestException;
 import com.bank.service.customer.CustomerCreateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,48 +21,49 @@ public class CustomerController {
     private CustomerCreateService customerCreateService;
 
     @ApiOperation(value = "Used for creating a new customer",
-        notes = "Adds the given user to the database.")
+            notes = "Adds the given user to the database.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Customer successfully added")
+            @ApiResponse(code = 200, message = "Customer successfully added"),
+            @ApiResponse(code = 403, message = "Username not available")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean){
+    public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean) throws BadRequestException {
         customerCreateService.createCustomer(customerBean);
     }
 
     @ApiOperation(value = "Used to get a customer",
-        notes = "Used for getting the information about a given customer.")
+            notes = "Used for getting the information about a given customer.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Customer successful retrieved")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
-    public CustomerBean getCustomer(HttpSession session, @PathVariable int customerId){
+    public CustomerBean getCustomer(HttpSession session, @PathVariable int customerId) {
         //TODO implement this
         return null;
     }
 
     @ApiOperation(value = "Used to update a customer",
-        notes = "Used to update a given customer. The fields will be overwritten. Fields not supplied will be set to null.")
+            notes = "Used to update a given customer. The fields will be overwritten. Fields not supplied will be set to null.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User successfully updated")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateCustomer(HttpSession session){
+    public void updateCustomer(HttpSession session) {
         //TODO implement this
     }
 
     @ApiOperation(value = "Used to remove a customer",
-        notes = "This does not really deletes the user, but sets the user to inactive. This keeps all the records linked " +
-                "to this customer intact.")
+            notes = "This does not really deletes the user, but sets the user to inactive. This keeps all the records linked " +
+                    "to this customer intact.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User successfully removed")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteCustomer(HttpSession session, @RequestBody CustomerDeleteCommand customerDeleteCommand){
+    public void deleteCustomer(HttpSession session, @RequestBody CustomerDeleteCommand customerDeleteCommand) {
         //TODO implement this
     }
 

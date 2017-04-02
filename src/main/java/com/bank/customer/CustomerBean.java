@@ -15,7 +15,7 @@ public class CustomerBean {
     @Column(name = "customer_id", insertable = false)
     private int customerId;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, length = 20)
     private String userName;
 
     private String password;
