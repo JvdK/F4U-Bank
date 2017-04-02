@@ -3,7 +3,9 @@ package com.bank.controller;
 import com.bank.bean.customer.CustomerBean;
 import com.bank.bean.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
+import com.bank.constant.SessionConstant;
 import com.bank.exception.BadRequestException;
+import com.bank.exception.NotLoggedInException;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customer.CustomerGetService;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +39,7 @@ public class CustomerController {
         customerCreateService.createCustomer(customerBean);
     }
 
-    @ApiOperation(value = "Used to get a customer",
+    @ApiOperation(value = "Used to get customer details",
             notes = "Used for getting the information about a given customer.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Customer successful retrieved")
@@ -46,6 +48,23 @@ public class CustomerController {
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
     public CustomerDetailsProjection getCustomer(HttpSession session, @PathVariable int customerId) {
         return customerGetService.getCustomerById(customerId);
+    }
+
+    @ApiOperation(value = "Used to get the details of the logged in customer",
+            notes = "Returns the details of the logged in customer.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Customer successful retrieved"),
+            @ApiResponse(code = 403, message = "Customer not logged in")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.GET)
+    public CustomerDetailsProjection getLoggedInCustomer(HttpSession session) throws NotLoggedInException {
+        System.out.println("kdsajlfjfdsal;fdsa");
+        if(session.getAttribute(SessionConstant.CUSTOMER_ID) != null) {
+            return customerGetService.getCustomerById((Integer) session.getAttribute(SessionConstant.CUSTOMER_ID));
+        }else{
+            throw new NotLoggedInException();
+        }
     }
 
     @ApiOperation(value = "Used to update a customer",
