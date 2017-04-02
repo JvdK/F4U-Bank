@@ -54,7 +54,7 @@ public class CustomerGetTest {
                 then().
                 statusCode(200).
                 extract().cookie("JSESSIONID");
-        System.out.println(cookie);
+
         given().
                 contentType("application/json").
                 cookie("JSESSIONID", cookie).
