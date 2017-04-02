@@ -1,4 +1,4 @@
-package com.bank.repository;
+package com.bank.repository.session;
 
 import com.bank.bean.session.LoginBean;
 import org.springframework.data.repository.CrudRepository;

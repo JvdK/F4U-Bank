@@ -2,7 +2,7 @@ package com.bank.service.customer;
 
 import com.bank.bean.customer.CustomerBean;
 import com.bank.exception.BadRequestException;
-import com.bank.repository.CustomerRepository;
+import com.bank.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
