@@ -1,9 +1,11 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.CustomerBean;
+import com.bank.bean.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.service.customer.CustomerCreateService;
+import com.bank.service.customer.CustomerGetService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -19,6 +21,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerCreateService customerCreateService;
+
+    @Autowired
+    private CustomerGetService customerGetService;
 
     @ApiOperation(value = "Used for creating a new customer",
             notes = "Adds the given user to the database.")
@@ -39,9 +44,9 @@ public class CustomerController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
-    public CustomerBean getCustomer(HttpSession session, @PathVariable int customerId) {
+    public CustomerDetailsProjection getCustomer(HttpSession session, @PathVariable int customerId) {
         //TODO implement this
-        return null;
+        return customerGetService.getCustomerById(customerId);
     }
 
     @ApiOperation(value = "Used to update a customer",

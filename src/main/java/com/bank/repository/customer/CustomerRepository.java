@@ -1,10 +1,11 @@
-package com.bank.repository;
+package com.bank.repository.customer;
 
 import com.bank.bean.customer.CustomerBean;
+import com.bank.bean.customer.CustomerDetailsProjection;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CustomerRepository extends CrudRepository<CustomerBean, Integer> {
 
-    /** only used for removing test data **/
-    void removeCustomerBeanByUserName(String username);
 }
