@@ -1,4 +1,4 @@
-package com.bank.bean.customer;
+package com.bank.projection.customer;
 
 import java.util.Date;
 
