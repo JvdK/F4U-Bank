@@ -48,6 +48,10 @@ public class CustomerBean {
 
     private String email;
 
+    @JsonIgnore
+    @Column(name = "is_active")
+    private boolean isActive = false;
+
     public int getCustomerId() {
         return customerId;
     }
@@ -158,6 +162,14 @@ public class CustomerBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @PrePersist
