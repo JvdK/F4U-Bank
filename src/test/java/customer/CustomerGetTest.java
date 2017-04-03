@@ -1,4 +1,5 @@
 package customer;
+
 import com.bank.command.session.LoginCommand;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 public class CustomerGetTest {
 
     @Test
-    public void getTestUser(){
+    public void getTestUser() {
         given().
                 contentType("application/json").
                 when().
@@ -21,7 +22,7 @@ public class CustomerGetTest {
     }
 
     @Test
-    public void getNonExistingUser(){
+    public void getNonExistingUser() {
         given().
                 contentType("application/json").
                 when().
@@ -32,7 +33,7 @@ public class CustomerGetTest {
     }
 
     @Test
-    public void notLoggedInGet(){
+    public void notLoggedInGet() {
         given().
                 contentType("application/json").
                 when().
@@ -42,7 +43,7 @@ public class CustomerGetTest {
     }
 
     @Test
-    public void loggedInGet(){
+    public void loggedInGet() {
         LoginCommand command = new LoginCommand();
         command.setUsername("testacount");
         command.setPassword("test");

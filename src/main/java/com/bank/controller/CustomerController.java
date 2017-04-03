@@ -1,7 +1,7 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.CustomerBean;
-import com.bank.bean.customer.CustomerDetailsProjection;
+import com.bank.projection.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.constant.SessionConstant;
 import com.bank.exception.BadRequestException;

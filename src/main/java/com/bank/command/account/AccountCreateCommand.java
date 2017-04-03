@@ -2,13 +2,13 @@ package com.bank.command.account;
 
 public class AccountCreateCommand {
 
-    int customer_id;
+    int customerId;
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }
