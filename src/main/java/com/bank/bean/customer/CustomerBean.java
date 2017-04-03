@@ -32,7 +32,7 @@ public class CustomerBean {
     private Date dateOfBirth;
 
     @JsonIgnore
-    @Column(name = "date_of_creation")
+    @Column(name = "date_of_creation", updatable = false)
     private Date dateOfCreation;
 
     private String address;
