@@ -7,6 +7,7 @@ import com.bank.constant.SessionConstant;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotLoggedInException;
 import com.bank.service.customer.CustomerCreateService;
+import com.bank.service.customer.CustomerDeleteService;
 import com.bank.service.customer.CustomerGetService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,6 +27,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerGetService customerGetService;
+
+    @Autowired
+    private CustomerDeleteService customerDeleteService;
 
     @ApiOperation(value = "Used for creating a new customer",
             notes = "Adds the given user to the database.")
@@ -86,7 +90,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteCustomer(HttpSession session, @RequestBody CustomerDeleteCommand customerDeleteCommand) {
-        //TODO implement this
+        customerDeleteService.deleteCustomer(customerDeleteCommand.getCustomerId());
     }
 
 
