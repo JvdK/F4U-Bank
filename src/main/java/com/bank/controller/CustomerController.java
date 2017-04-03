@@ -6,9 +6,11 @@ import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.constant.SessionConstant;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotLoggedInException;
+import com.bank.projection.customer.CustomerUpdateProjection;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customer.CustomerDeleteService;
 import com.bank.service.customer.CustomerGetService;
+import com.bank.service.customer.CustomerUpdateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,6 +32,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerDeleteService customerDeleteService;
+
+    @Autowired
+    private CustomerUpdateService customerUpdateService;
 
     @ApiOperation(value = "Used for creating a new customer",
             notes = "Adds the given user to the database.")
@@ -77,8 +82,9 @@ public class CustomerController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateCustomer(HttpSession session) {
+    public void updateCustomer(HttpSession session, @RequestBody CustomerUpdateProjection customerUpdateProjection) {
         //TODO implement this
+        customerUpdateService.updateCustomer(1);
     }
 
     @ApiOperation(value = "Used to remove a customer",
