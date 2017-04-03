@@ -13,6 +13,6 @@ public interface CustomerDeleteRepository extends CrudRepository<CustomerBean, I
 
     @Modifying
     @Transactional
-    @Query("update CustomerBean bean set bean.isActive= false where bean.customerId = :customerId")
+    @Query("update CustomerBean bean set bean.isActive = false where bean.customerId = :customerId")
     public void deleteCustomer(@Param("customerId") int customerId);
 }
