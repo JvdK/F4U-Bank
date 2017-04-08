@@ -1,6 +1,7 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.CustomerBean;
+import com.bank.command.customer.CustomerUpdateCommand;
 import com.bank.projection.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.constant.SessionConstant;
@@ -9,6 +10,7 @@ import com.bank.exception.NotLoggedInException;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customer.CustomerDeleteService;
 import com.bank.service.customer.CustomerGetService;
+import com.bank.service.customer.CustomerUpdateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -30,6 +32,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerDeleteService customerDeleteService;
+
+    @Autowired
+    private CustomerUpdateService customerUpdateService;
 
     @ApiOperation(value = "Used for creating a new customer",
             notes = "Adds the given user to the database.")
@@ -71,14 +76,14 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "Used to update a customer",
-            notes = "Used to update a given customer. The fields will be overwritten. Fields not supplied will be set to null.")
+            notes = "Used to update a given customer. Fields not supplied will stay as they were.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User successfully updated")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateCustomer(HttpSession session) {
-        //TODO implement this
+    public void updateCustomer(HttpSession session, @RequestBody CustomerUpdateCommand customerUpdateCommand) {
+        customerUpdateService.updateCustomer(customerUpdateCommand);
     }
 
     @ApiOperation(value = "Used to remove a customer",

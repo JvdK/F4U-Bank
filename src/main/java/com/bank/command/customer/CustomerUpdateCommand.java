@@ -1,45 +1,19 @@
-package com.bank.bean.customer;
+package com.bank.command.customer;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+public class CustomerUpdateCommand {
 
-import javax.persistence.*;
-import java.util.Date;
-
-
-@Entity
-@Table(name = "customer")
-public class CustomerBean {
-
-    @Id
-    @JsonIgnore
-    @Column(name = "customer_id", insertable = false)
     private int customerId;
 
-    @Column(name = "user_name", nullable = false, length = 20)
-    private String userName;
-
-    private String password;
-
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
     private String initials;
-
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
-
-    @JsonIgnore
-    @Column(name = "date_of_creation", updatable = false)
-    private Date dateOfCreation;
 
     private String address;
 
     private String phone;
 
-    @Column(name = "postal_code")
     private String postalCode;
 
     private String city;
@@ -48,24 +22,12 @@ public class CustomerBean {
 
     private String email;
 
-    @JsonIgnore
-    @Column(name = "is_active")
-    private boolean isActive = false;
-
     public int getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -90,22 +52,6 @@ public class CustomerBean {
 
     public void setInitials(String initials) {
         this.initials = initials;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public String getAddress() {
@@ -154,26 +100,5 @@ public class CustomerBean {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    @PrePersist
-    void dateOfCreation() {
-        this.dateOfCreation = new Date();
     }
 }
