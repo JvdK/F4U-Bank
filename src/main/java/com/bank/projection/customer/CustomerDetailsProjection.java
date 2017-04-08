@@ -15,6 +15,7 @@ public interface CustomerDetailsProjection {
     String getPhone();
     String getPostalCode();
     String getCity();
+    String getCountry();
     String getEmail();
 
 }

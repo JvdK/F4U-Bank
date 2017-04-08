@@ -1,12 +1,12 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.CustomerBean;
+import com.bank.command.customer.CustomerUpdateCommand;
 import com.bank.projection.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
 import com.bank.constant.SessionConstant;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotLoggedInException;
-import com.bank.projection.customer.CustomerUpdateProjection;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customer.CustomerDeleteService;
 import com.bank.service.customer.CustomerGetService;
@@ -82,9 +82,8 @@ public class CustomerController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateCustomer(HttpSession session, @RequestBody CustomerUpdateProjection customerUpdateProjection) {
-        //TODO implement this
-        customerUpdateService.updateCustomer(1);
+    public void updateCustomer(HttpSession session, @RequestBody CustomerUpdateCommand customerUpdateCommand) {
+        customerUpdateService.updateCustomer(customerUpdateCommand);
     }
 
     @ApiOperation(value = "Used to remove a customer",
