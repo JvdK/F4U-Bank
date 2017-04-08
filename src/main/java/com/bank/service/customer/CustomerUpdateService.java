@@ -12,6 +12,10 @@ public class CustomerUpdateService {
     @Autowired
     private CustomerUpdateRepository customerUpdateRepository;
 
+    /**
+     * Updates the customer with the customerId given. If fields are not set, they are not updated in the database
+     * @param command update command
+     */
     public void updateCustomer(CustomerUpdateCommand command) {
         CustomerBean bean = customerUpdateRepository.findOne(command.getCustomerId());
         if(command.getFirstName()!=null) {
