@@ -76,7 +76,7 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "Used to update a customer",
-            notes = "Used to update a given customer. The fields will be overwritten. Fields not supplied will be set to null.")
+            notes = "Used to update a given customer. Fields not supplied will stay as they were.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User successfully updated")
     })
