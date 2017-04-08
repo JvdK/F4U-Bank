@@ -2,6 +2,7 @@ package session;
 
 import com.bank.command.customer.CustomerCreateCommand;
 import com.bank.command.session.LoginCommand;
+import io.restassured.http.ContentType;
 import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
@@ -119,5 +120,18 @@ public class SessionLoginTest {
                 statusCode(415);
     }
 
+    @Test
+    public void notActiveLogin(){
+        LoginCommand command = new LoginCommand();
+        command.setUsername("inactive");
+        command.setPassword("inactive");
+        given().
+                contentType(ContentType.JSON).
+                body(command).
+                when().
+                post("/rest/session").
+                then().
+                statusCode(403);
+    }
 
 }
