@@ -21,7 +21,8 @@ public class SessionController {
     private SessionLoginService sessionLoginService;
 
     @ApiOperation(value = "Used to login",
-            notes = "Checks whether the supplied username and password match. If so, in the session data the customer id is set. " +
+            notes = "Checks whether the supplied username and password match and if the customer has an active account. " +
+                    "If so, in the session data the customer id is set. " +
                     "A 200 is returned if login was successful, 403 is returned if login failed. Furthermore a cookie with " +
                     "a JSESSIONID field is set on the client side. ")
     @ApiResponses(value = {
