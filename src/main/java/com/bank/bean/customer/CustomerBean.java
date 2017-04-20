@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -163,5 +164,29 @@ public class CustomerBean {
     @PrePersist
     void dateOfCreation() {
         this.dateOfCreation = new Date();
+    }
+
+    @OneToMany(mappedBy = "customerBean")
+    private List<CustomerAccount> accounts;
+
+    public List<CustomerAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<CustomerAccount> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void addAccout(AccountBean accountBean, boolean isMain) {
+        CustomerAccount customerAccount = new CustomerAccount();
+
+        customerAccount.setAccountBean(accountBean);
+        customerAccount.setAccountId(accountBean.getAccountId());
+        customerAccount.setCustomerBean(this);
+        customerAccount.setCustomerId(this.getCustomerId());
+        customerAccount.setMain(isMain);
+        this.accounts.add(customerAccount);
+
+        accountBean.getCustomers().add(customerAccount);
     }
 }
