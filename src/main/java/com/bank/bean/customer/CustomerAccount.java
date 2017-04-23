@@ -1,5 +1,7 @@
 package com.bank.bean.customer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,12 +17,16 @@ public class CustomerAccount {
     @Column(name = "is_main")
     private boolean isMain;
 
+    @JsonIgnore
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "customer_id")
+//    @PrimaryKeyJoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id", updatable = false, insertable = false)
     private CustomerBean customerBean;
 
+    @JsonIgnore
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "account_id")
+//    @PrimaryKeyJoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JoinColumn(name = "account_id", updatable = false, insertable = false)
     private AccountBean accountBean;
 
     public int getCustomerId() {
@@ -61,5 +67,16 @@ public class CustomerAccount {
 
     public void setAccountBean(AccountBean accountBean) {
         this.accountBean = accountBean;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerAccount{" +
+                "customerId=" + customerId +
+                ", accountId=" + accountId +
+                ", isMain=" + isMain +
+                ", customerBean=" + customerBean +
+                ", accountBean=" + accountBean +
+                '}';
     }
 }

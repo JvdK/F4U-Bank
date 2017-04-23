@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface AccountCustomerRepository extends CrudRepository<CustomerAccount, Integer> {
 
-    List<AccountCustomerDetailsProjection> findCustomerAccountIdsByAccountId(int accountId);
+    List<AccountCustomerDetailsProjection> findCustomerAccountsByAccountId(int accountId);
 
 }

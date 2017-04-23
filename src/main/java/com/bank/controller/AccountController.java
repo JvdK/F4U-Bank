@@ -1,6 +1,7 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.AccountBean;
+import com.bank.bean.customer.CustomerAccount;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
@@ -28,7 +29,7 @@ public class AccountController {
     }
 
     @Autowired
-    private AccountCustomerService accountGetCustomersService;
+    private AccountCustomerService accountCustomersService;
 
     @Autowired
     private AccountAmountService accountAmountService;
@@ -75,7 +76,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/customers/{accountId}", method = RequestMethod.GET)
     public List<AccountCustomerDetailsProjection> getCustomers(@PathVariable("accountId") int accountId) {
-        return accountGetCustomersService.getCustomersOfAccount(accountId);
+        return accountCustomersService.getCustomersOfAccount(accountId);
     }
 
     @ApiOperation(value = "Used to get all the cards on this account",
@@ -88,4 +89,16 @@ public class AccountController {
     public void getCards() {
         //TODO implement this
     }
+
+    @ApiOperation(value = "Used to add a customer to a given account",
+            notes = "Adds the customer the given account")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Customer successfully added to account")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
+    public void addCustomerToAccount(@RequestBody CustomerAccount customerAccount) {
+        accountCustomersService.addCustomerAccount(customerAccount);
+    }
+
 }
