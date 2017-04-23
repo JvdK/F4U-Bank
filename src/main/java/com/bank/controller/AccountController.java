@@ -1,9 +1,13 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.AccountBean;
+import com.bank.bean.customer.CustomerAccount;
+import com.bank.bean.customer.CustomerAccountId;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
+import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
+import com.bank.service.account.AccountGetCustomersService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -12,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest/account")
@@ -22,6 +27,9 @@ public class AccountController {
     public AccountController(AccountCreateService accountCreateService) {
         this.accountCreateService = accountCreateService;
     }
+
+    @Autowired
+    private AccountGetCustomersService accountGetCustomersService;
 
     @ApiOperation(value = "Used to create a new account. ",
             notes = "Used to create a new account.")
@@ -63,9 +71,9 @@ public class AccountController {
             @ApiResponse(code = 200, message = "Account successfully deleted")
     })
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/customers/{acountId}", method = RequestMethod.GET)
-    public void getCustomers() {
-        //TODO implement this
+    @RequestMapping(value = "/customers/{accountId}", method = RequestMethod.GET)
+    public List<AccountCustomerDetailsProjection> getCustomers(@PathVariable("accountId") int accountId) {
+        return accountGetCustomersService.getCustomersOfAccount(accountId);
     }
 
     @ApiOperation(value = "Used to get all the cards on this account",
@@ -74,7 +82,7 @@ public class AccountController {
             @ApiResponse(code = 200, message = "Account successfully deleted")
     })
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/cards/{acountId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cards/{accountId}", method = RequestMethod.GET)
     public void getCards() {
         //TODO implement this
     }
