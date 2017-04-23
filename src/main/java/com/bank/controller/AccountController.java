@@ -5,8 +5,8 @@ import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
-import com.bank.service.account.AccountGetAmountService;
-import com.bank.service.account.AccountGetCustomersService;
+import com.bank.service.account.AccountAmountService;
+import com.bank.service.account.AccountCustomerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -28,10 +28,10 @@ public class AccountController {
     }
 
     @Autowired
-    private AccountGetCustomersService accountGetCustomersService;
+    private AccountCustomerService accountGetCustomersService;
 
     @Autowired
-    private AccountGetAmountService accountGetAmountService;
+    private AccountAmountService accountAmountService;
 
     @ApiOperation(value = "Used to create a new account. ",
             notes = "Used to create a new account.")
@@ -64,7 +64,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/amount/{accountId}", method = RequestMethod.GET)
     public double getAmount(@PathVariable int accountId) {
-        return accountGetAmountService.getAmountOfAccount(accountId);
+        return accountAmountService.getAmountOfAccount(accountId);
     }
 
     @ApiOperation(value = "Used to get all the users on this account",
