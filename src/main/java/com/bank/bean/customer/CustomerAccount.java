@@ -7,10 +7,12 @@ import javax.persistence.*;
 @IdClass(CustomerAccountId.class)
 public class CustomerAccount {
     @Id
+    @Column(name = "customer_id")
     private int customerId;
     @Id
+    @Column(name = "account_id")
     private int accountId;
-    @Column
+    @Column(name = "is_main")
     private boolean isMain;
 
     @ManyToOne

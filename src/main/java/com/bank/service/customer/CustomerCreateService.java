@@ -27,8 +27,8 @@ public class CustomerCreateService {
 
     }
 
-    public void linkCustomerAccount(CustomerBean customerBean, AccountBean accountBean) {
-        customerBean.addAccout(accountBean, true);
-        customerRepository.save(customerBean);
-    }
+//    public void linkCustomerAccount(CustomerBean customerBean, AccountBean accountBean) {
+//        customerBean.addAccout(accountBean, true);
+//        customerRepository.save(customerBean);
+//    }
 }

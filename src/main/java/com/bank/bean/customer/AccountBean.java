@@ -58,7 +58,7 @@ public class AccountBean {
     @OneToMany(mappedBy = "accountBean")
     private List<CustomerAccount> customers;
 
-    List<CustomerAccount> getCustomers() {
+    public List<CustomerAccount> getCustomers() {
         return customers;
     }
 

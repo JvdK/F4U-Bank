@@ -166,27 +166,27 @@ public class CustomerBean {
         this.dateOfCreation = new Date();
     }
 
-    @OneToMany(mappedBy = "customerBean")
-    private List<CustomerAccount> accounts;
-
-    public List<CustomerAccount> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<CustomerAccount> accounts) {
-        this.accounts = accounts;
-    }
-
-    public void addAccout(AccountBean accountBean, boolean isMain) {
-        CustomerAccount customerAccount = new CustomerAccount();
-
-        customerAccount.setAccountBean(accountBean);
-        customerAccount.setAccountId(accountBean.getAccountId());
-        customerAccount.setCustomerBean(this);
-        customerAccount.setCustomerId(this.getCustomerId());
-        customerAccount.setMain(isMain);
-        this.accounts.add(customerAccount);
-
-        accountBean.getCustomers().add(customerAccount);
-    }
+//    @OneToMany(mappedBy = "customerBean")
+//    private List<CustomerAccount> accounts;
+//
+//    public List<CustomerAccount> getAccounts() {
+//        return accounts;
+//    }
+//
+//    public void setAccounts(List<CustomerAccount> accounts) {
+//        this.accounts = accounts;
+//    }
+//
+//    public void addAccout(AccountBean accountBean, boolean isMain) {
+//        CustomerAccount customerAccount = new CustomerAccount();
+//
+//        customerAccount.setAccountBean(accountBean);
+//        customerAccount.setAccountId(accountBean.getAccountId());
+//        customerAccount.setCustomerBean(this);
+//        customerAccount.setCustomerId(this.getCustomerId());
+//        customerAccount.setMain(isMain);
+//        this.accounts.add(customerAccount);
+//
+//        accountBean.getCustomers().add(customerAccount);
+//    }
 }
