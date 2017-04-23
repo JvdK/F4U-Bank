@@ -1,12 +1,11 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.AccountBean;
-import com.bank.bean.customer.CustomerAccount;
-import com.bank.bean.customer.CustomerAccountId;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
+import com.bank.service.account.AccountGetAmountService;
 import com.bank.service.account.AccountGetCustomersService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,6 +29,9 @@ public class AccountController {
 
     @Autowired
     private AccountGetCustomersService accountGetCustomersService;
+
+    @Autowired
+    private AccountGetAmountService accountGetAmountService;
 
     @ApiOperation(value = "Used to create a new account. ",
             notes = "Used to create a new account.")
@@ -60,9 +62,9 @@ public class AccountController {
             @ApiResponse(code = 200, message = "Account successfully deleted")
     })
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/amount/{acountId}", method = RequestMethod.GET)
-    public void getAmount(HttpSession session, @PathVariable int acountId) {
-        //TODO implement this
+    @RequestMapping(value = "/amount/{accountId}", method = RequestMethod.GET)
+    public double getAmount(@PathVariable int accountId) {
+        return accountGetAmountService.getAmountOfAccount(accountId);
     }
 
     @ApiOperation(value = "Used to get all the users on this account",
