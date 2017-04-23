@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AccountGetCustomersRepository extends CrudRepository<CustomerAccount, Integer> {
+public interface AccountCustomerRepository extends CrudRepository<CustomerAccount, Integer> {
 
     List<AccountCustomerDetailsProjection> findCustomerAccountIdsByAccountId(int accountId);
 
