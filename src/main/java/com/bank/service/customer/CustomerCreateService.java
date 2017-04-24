@@ -1,5 +1,6 @@
 package com.bank.service.customer;
 
+import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerBean;
 import com.bank.exception.BadRequestException;
 import com.bank.repository.customer.CustomerRepository;
@@ -10,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerCreateService {
 
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    CustomerRepository customerRepository;
+    public CustomerCreateService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public void createCustomer(CustomerBean customerBean) throws BadRequestException {
         try {
@@ -21,4 +26,9 @@ public class CustomerCreateService {
         }
 
     }
+
+//    public void linkCustomerAccount(CustomerBean customerBean, AccountBean accountBean) {
+//        customerBean.addAccout(accountBean, true);
+//        customerRepository.save(customerBean);
+//    }
 }

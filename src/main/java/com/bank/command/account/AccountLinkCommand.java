@@ -1,6 +1,6 @@
 //package com.bank.command.account;
 //
-//public class AccountCreateCommand {
+//public class AccountLinkCommand {
 //
 //    private String accountNumber;
 //    private boolean isMain;
