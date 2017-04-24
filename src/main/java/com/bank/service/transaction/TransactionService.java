@@ -37,11 +37,12 @@ public class TransactionService {
         source.setAmount(source.getAmount()-command.getAmount());
         target.setAmount(target.getAmount()+command.getAmount());
 
-        CardBean card = cardRepository.findOne(command.getCardId());
-
+        if(command.getCardId()!=null) {
+            CardBean card = cardRepository.findOne(command.getCardId());
+            bean.setCard(card);
+        }
         bean.setSourceBean(source);
         bean.setTargetBean(target);
-        bean.setCard(card);
         bean.setAmount(command.getAmount());
 
     }

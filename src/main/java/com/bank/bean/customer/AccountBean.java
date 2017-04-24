@@ -10,6 +10,7 @@ import java.util.List;
 public class AccountBean {
     @Id
     @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private int accountId;
 
