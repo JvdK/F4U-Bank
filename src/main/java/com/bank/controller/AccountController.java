@@ -4,6 +4,7 @@ import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerAccount;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
+import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
@@ -64,7 +65,7 @@ public class AccountController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/amount/{accountId}", method = RequestMethod.GET)
-    public double getAmount(@PathVariable int accountId) {
+    public AccountAmountProjection getAmount(@PathVariable int accountId) {
         return accountAmountService.getAmountOfAccount(accountId);
     }
 
