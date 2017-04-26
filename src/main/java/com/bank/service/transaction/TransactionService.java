@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 public class TransactionService {
 
@@ -43,6 +45,10 @@ public class TransactionService {
 
         if(command.getCardId()!=null) {
             CardBean card = cardRepository.findOne(command.getCardId());
+            //check if card is not expired or is not valid
+            if(!card.isValid()||card.getDateOfExpiration().getTime() < new Date().getTime()){
+                throw new BadRequestException();
+            }
             bean.setCard(card);
         }
         bean.setSourceBean(source);
