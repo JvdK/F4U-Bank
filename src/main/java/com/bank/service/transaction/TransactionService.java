@@ -33,8 +33,8 @@ public class TransactionService {
             throw new BadRequestException();
         }
         TransactionBean bean = new TransactionBean();
-        AccountBean source = accountRepository.findOne(command.getSourceId());
-        AccountBean target = accountRepository.findOne(command.getTargetId());
+        AccountBean source = accountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(command.getSourceId());
+        AccountBean target = accountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(command.getTargetId());
 
         if(source==null||target==null){
             throw new NotFoundException();

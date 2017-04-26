@@ -1,6 +1,7 @@
 package com.bank.service.account;
 
 import com.bank.projection.account.AccountAmountProjection;
+import com.bank.repository.account.AccountAmountRepository;
 import com.bank.repository.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class AccountAmountService {
 
     @Autowired
-    AccountRepository accountRepository;
+    AccountAmountRepository accountAmountRepository;
 
     public AccountAmountProjection getAmountOfAccount(int accountId){
-        return accountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(accountId);
+        return accountAmountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(accountId);
     }
 }
