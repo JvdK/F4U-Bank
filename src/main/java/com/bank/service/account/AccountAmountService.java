@@ -11,7 +11,7 @@ public class AccountAmountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public AccountAmountProjection getAmountOfAccount(int acountId){
-        return accountRepository.findAccountBeanByAccountId(acountId);
+    public AccountAmountProjection getAmountOfAccount(int accountId){
+        return accountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(accountId);
     }
 }

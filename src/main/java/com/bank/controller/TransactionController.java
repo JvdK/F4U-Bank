@@ -1,6 +1,7 @@
 package com.bank.controller;
 
 import com.bank.command.transaction.TransactionAddCommand;
+import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
 import com.bank.service.transaction.TransactionService;
 import io.swagger.annotations.ApiOperation;
@@ -22,11 +23,12 @@ public class TransactionController {
                     "No authentication is necessary at this moment, and the card is optionally. ")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Customer successfully added"),
+            @ApiResponse(code = 400, message = "Not a correct request"),
             @ApiResponse(code = 404, message = "Unknown source or target account")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void doTransaction(@RequestBody TransactionAddCommand command) throws NotFoundException {
+    public void doTransaction(@RequestBody TransactionAddCommand command) throws NotFoundException, BadRequestException {
         transactionService.doTransaction(command);
     }
 

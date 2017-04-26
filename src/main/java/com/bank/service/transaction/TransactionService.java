@@ -4,6 +4,7 @@ import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.AccountBean;
 import com.bank.bean.transaction.TransactionBean;
 import com.bank.command.transaction.TransactionAddCommand;
+import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.card.CardRepository;
@@ -25,7 +26,10 @@ public class TransactionService {
     private CardRepository cardRepository;
 
     @Transactional
-    public void doTransaction(TransactionAddCommand command) throws NotFoundException {
+    public void doTransaction(TransactionAddCommand command) throws NotFoundException, BadRequestException {
+        if(command.getAmount()<0){
+            throw new BadRequestException();
+        }
         TransactionBean bean = new TransactionBean();
         AccountBean source = accountRepository.findOne(command.getSourceId());
         AccountBean target = accountRepository.findOne(command.getTargetId());
