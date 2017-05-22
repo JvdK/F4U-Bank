@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountAmountRepository extends CrudRepository<AccountBean, Integer> {
 
-    AccountAmountProjection findAccountBeanByAccountIdWhereIsActiveTrue(int accountId);
+    AccountAmountProjection findAccountBeanByAccountIdAndIsActiveTrue(int accountId);
 
 
 }

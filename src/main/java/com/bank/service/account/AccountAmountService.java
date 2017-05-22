@@ -13,6 +13,6 @@ public class AccountAmountService {
     AccountAmountRepository accountAmountRepository;
 
     public AccountAmountProjection getAmountOfAccount(int accountId){
-        return accountAmountRepository.findAccountBeanByAccountIdWhereIsActiveTrue(accountId);
+        return accountAmountRepository.findAccountBeanByAccountIdAndIsActiveTrue(accountId);
     }
 }

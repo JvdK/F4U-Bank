@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository extends CrudRepository<AccountBean, Integer> {
 
 
-    AccountBean findAccountBeanByAccountIdWhereIsActiveTrue(int accountId);
+    AccountBean findAccountBeanByAccountIdAndIsActiveTrue(int accountId);
 
 }
