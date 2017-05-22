@@ -2,11 +2,14 @@ package com.bank.service.customer;
 
 import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerBean;
+import com.bank.command.customer.CustomerCreateCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
 
 @Service
 public class CustomerCreateService {
@@ -18,17 +21,27 @@ public class CustomerCreateService {
         this.customerRepository = customerRepository;
     }
 
-    public void createCustomer(CustomerBean customerBean) throws BadRequestException {
+    public void createCustomer(CustomerCreateCommand command) throws BadRequestException {
         try {
-            customerRepository.save(customerBean);
+            CustomerBean bean = new CustomerBean();
+            bean.setUserName(command.getUserName());
+            bean.setPassword(command.getPassword());
+            bean.setFirstName(command.getFirstName());
+            bean.setLastName(command.getLastName());
+            bean.setInitials(command.getInitials());
+            bean.setDateOfBirth(command.getDateOfBirth());
+            bean.setAddress(command.getAddress());
+            bean.setPhone(command.getPhone());
+            bean.setPostalCode(command.getPostalCode());
+            bean.setCity(command.getCity());
+            bean.setCountry(command.getCountry());
+            bean.setEmail(command.getEmail());
+            bean.setActive(true);
+            customerRepository.save(bean);
         } catch (DataIntegrityViolationException e) {
             throw new BadRequestException();
         }
 
     }
 
-//    public void linkCustomerAccount(CustomerBean customerBean, AccountBean accountBean) {
-//        customerBean.addAccout(accountBean, true);
-//        customerRepository.save(customerBean);
-//    }
 }

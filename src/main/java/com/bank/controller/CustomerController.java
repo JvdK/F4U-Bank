@@ -1,6 +1,7 @@
 package com.bank.controller;
 
 import com.bank.bean.customer.CustomerBean;
+import com.bank.command.customer.CustomerCreateCommand;
 import com.bank.command.customer.CustomerUpdateCommand;
 import com.bank.projection.customer.CustomerDetailsProjection;
 import com.bank.command.customer.CustomerDeleteCommand;
@@ -44,8 +45,8 @@ public class CustomerController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void createCustomer(HttpSession session, @RequestBody CustomerBean customerBean) throws BadRequestException {
-        customerCreateService.createCustomer(customerBean);
+    public void createCustomer(HttpSession session, @RequestBody CustomerCreateCommand command) throws BadRequestException {
+        customerCreateService.createCustomer(command);
     }
 
     @ApiOperation(value = "Used to get customer details",

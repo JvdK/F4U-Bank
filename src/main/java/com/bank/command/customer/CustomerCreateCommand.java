@@ -5,20 +5,14 @@ import java.sql.Date;
 
 public class CustomerCreateCommand {
 
-    @Column(name = "user_name")
     private String userName;
-    @Column(name = "first_name")
     private String password;
     private String firstName;
-    @Column(name = "last_name")
     private String lastName;
     private String initials;
-    @Column(name = "date_of_birth")
     private Date dateOfBirth;
-    @Column(name = "date_of_creation")
     private String address;
     private String phone;
-    @Column(name = "postal_code")
     private String postalCode;
     private String city;
     private String country;
