@@ -2,6 +2,7 @@ package com.bank.controller;
 
 import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerAccount;
+import com.bank.command.account.AccountCreateCommand;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
@@ -47,8 +48,8 @@ public class AccountController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void createAccount(HttpSession session, @RequestBody AccountBean accountBean) throws BadRequestException {
-        accountCreateService.createAccount(accountBean);
+    public void createAccount(HttpSession session, @RequestBody AccountCreateCommand command) throws BadRequestException {
+        accountCreateService.createAccount(command);
     }
 
     @ApiOperation(value = "Used to delete an account",
