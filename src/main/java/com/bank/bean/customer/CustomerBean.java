@@ -13,6 +13,7 @@ public class CustomerBean {
 
     @Id
     @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", insertable = false)
     private int customerId;
 

@@ -1,6 +1,7 @@
 package com.bank.service.account;
 
 import com.bank.bean.customer.AccountBean;
+import com.bank.command.account.AccountCreateCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.repository.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ public class AccountCreateService {
         this.accountRepository = accountRepository;
     }
 
-    public void createAccount(AccountBean accountBean) throws BadRequestException {
-        accountRepository.save(accountBean);
+    public void createAccount(AccountCreateCommand command) throws BadRequestException {
+        AccountBean bean = new AccountBean();
+        bean.setAccountNumber(command.getAccountNumber());
+        bean.setActive(true);
+        accountRepository.save(bean);
     }
 }
