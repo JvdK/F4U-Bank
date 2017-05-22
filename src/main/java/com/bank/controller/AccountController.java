@@ -4,11 +4,13 @@ import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerAccount;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.BadRequestException;
+import com.bank.exception.NotFoundException;
 import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
 import com.bank.service.account.AccountCustomerService;
+import com.bank.service.account.AccountDeleteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,6 +37,9 @@ public class AccountController {
     @Autowired
     private AccountAmountService accountAmountService;
 
+    @Autowired
+    private AccountDeleteService accountDeleteService;
+
     @ApiOperation(value = "Used to create a new account. ",
             notes = "Used to create a new account.")
     @ApiResponses(value = {
@@ -50,12 +55,13 @@ public class AccountController {
             notes = "This does not remove the account from the database. The account will be made inactive. This keeps the " +
                     "foreign keys intact.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Account successfully deleted")
+            @ApiResponse(code = 200, message = "Account successfully deleted"),
+            @ApiResponse(code = 404, message = "Account not found")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteAccount(HttpSession session, @RequestBody AccountDeleteCommand accountDeleteCommand) {
-        //TODO implement this
+    public void deleteAccount(HttpSession session, @RequestBody AccountDeleteCommand accountDeleteCommand) throws NotFoundException {
+        accountDeleteService.deleteAccount(accountDeleteCommand);
     }
 
     @ApiOperation(value = "Used to get the amount on the account",
