@@ -4,6 +4,7 @@ import com.bank.bean.customer.AccountBean;
 import com.bank.bean.customer.CustomerAccount;
 import com.bank.command.account.AccountCreateCommand;
 import com.bank.command.account.AccountDeleteCommand;
+import com.bank.command.account.CustomerAccountCreateCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
 import com.bank.projection.account.AccountAmountProjection;
@@ -105,8 +106,8 @@ public class AccountController {
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-    public void addCustomerToAccount(@RequestBody CustomerAccount customerAccount) {
-        accountCustomersService.addCustomerAccount(customerAccount);
+    public void addCustomerToAccount(@RequestBody CustomerAccountCreateCommand command) {
+        accountCustomersService.addCustomerAccount(command);
     }
 
 }
