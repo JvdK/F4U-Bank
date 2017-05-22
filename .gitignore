@@ -4,3 +4,4 @@ target/
 *.iml
 
 *.properties
+/src/main/resources/application.properties
