@@ -8,13 +8,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "customer")
 public class LoginBean {
-
-
+    /**
+     * User name of the customer.
+     */
     @Column(name = "user_name")
     private String userName;
 
+    /**
+     * Password of the customer.
+     */
     private String password;
 
+    /**
+     * Internal customer id.
+     */
     @Id
     @Column(name = "customer_id")
     private int customerId;

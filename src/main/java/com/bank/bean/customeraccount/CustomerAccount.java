@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+/**
+ * This class covers the relation between a customer and a account.
+ */
 @Entity
 @Table(name = "customer_account")
 @IdClass(CustomerAccountId.class)
@@ -13,21 +16,24 @@ public class CustomerAccount {
     @Id
     @Column(name = "customer_id")
     private int customerId;
+
     @Id
     @Column(name = "account_id")
     private int accountId;
+
+    /**
+     * Indicates whether the referenced customer_id is the main owner of the account.
+     */
     @Column(name = "is_main")
     private boolean isMain;
 
     @JsonIgnore
     @ManyToOne
-//    @PrimaryKeyJoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @JoinColumn(name = "customer_id", updatable = false, insertable = false)
     private CustomerBean customerBean;
 
     @JsonIgnore
     @ManyToOne
-//    @PrimaryKeyJoinColumn(name = "account_id", referencedColumnName = "account_id")
     @JoinColumn(name = "account_id", updatable = false, insertable = false)
     private AccountBean accountBean;
 

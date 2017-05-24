@@ -4,52 +4,97 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-
+/**
+ * The Customer class contains all relevant data field for a customer.
+ */
 @Entity
 @Table(name = "customer")
 public class CustomerBean {
-
+    /**
+     * Internal customer id.
+     */
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", insertable = false)
     private int customerId;
 
+    /**
+     * User name for customer they can use for authentication.
+     */
     @Column(name = "user_name", nullable = false, length = 20)
     private String userName;
 
+    /**
+     * Password for customer they can use for authentication.
+     */
     private String password;
 
+    /**
+     * Full first name of the customer.
+     */
     @Column(name = "first_name")
     private String firstName;
 
+    /**
+     * Full last name of the customer.
+     */
     @Column(name = "last_name")
     private String lastName;
 
+    /**
+     * Initials of the first names of the customer.
+     */
     private String initials;
 
+    /**
+     * Date the customer was born.
+     */
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
+    /**
+     * Date and time the customer was added to the database.
+     */
     @JsonIgnore
     @Column(name = "date_of_creation", updatable = false)
     private Date dateOfCreation;
 
+    /**
+     * Full street, house number and optional additions to the house number, currently no validation is implemented.
+     */
     private String address;
 
+    /**
+     * Phone number of the customer, currently no validation is implemented.
+     */
     private String phone;
 
+    /**
+     * Postal code or zip code of the address of the customer, currently no validation is implemented.
+     */
     @Column(name = "postal_code")
     private String postalCode;
 
+    /**
+     * City the customer currently lives in, currently no validation is implemented.
+     */
     private String city;
 
+    /**
+     * Country of the customer, currently no validation or normalisation is implemented.
+     */
     private String country;
 
+    /**
+     * Email address of the customer, currently no validation is implemented.
+     */
     private String email;
 
+    /**
+     * Indicates whether the customer account is active or not.
+     */
     @JsonIgnore
     @Column(name = "is_active")
     private boolean isActive = false;
@@ -177,29 +222,6 @@ public class CustomerBean {
     @PrePersist
     void dateOfCreation() {
         this.dateOfCreation = new Date();
-    }
 
-//    @OneToMany(mappedBy = "customerBean")
-//    private List<CustomerAccount> accounts;
-//
-//    public List<CustomerAccount> getAccounts() {
-//        return accounts;
-//    }
-//
-//    public void setAccounts(List<CustomerAccount> accounts) {
-//        this.accounts = accounts;
-//    }
-//
-//    public void addAccout(AccountBean accountBean, boolean isMain) {
-//        CustomerAccount customeraccount = new CustomerAccount();
-//
-//        customeraccount.setAccountBean(accountBean);
-//        customeraccount.setAccountId(accountBean.getAccountId());
-//        customeraccount.setCustomerBean(this);
-//        customeraccount.setCustomerId(this.getCustomerId());
-//        customeraccount.setMain(isMain);
-//        this.accounts.add(customeraccount);
-//
-//        accountBean.getCustomers().add(customeraccount);
-//    }
+    }
 }
