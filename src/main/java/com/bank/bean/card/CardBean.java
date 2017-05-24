@@ -10,16 +10,24 @@ import java.util.Date;
 @Entity
 @Table(name = "card")
 public class CardBean {
-
+    /**
+     * Internal card id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     @Column(name = "card_id")
     private int cardId;
 
+    /**
+     * The number on the card.
+     */
     @Column(name = "card_number")
     private int cardNumber;
 
+    /**
+     * Date the card expires.
+     */
     @JsonIgnore
     @Column(name = "date_of_expiration")
     private Date dateOfExpiration;
@@ -32,13 +40,15 @@ public class CardBean {
     @JoinColumn(name = "account_id")
     private AccountBean accountBean;
 
+    /**
+     * Indicates whether the card is still valid.
+     */
     @Column(name = "is_valid")
     private boolean isValid;
 
     public int getCardId() {
         return cardId;
     }
-
 
     public int getCardNumber() {
         return cardNumber;

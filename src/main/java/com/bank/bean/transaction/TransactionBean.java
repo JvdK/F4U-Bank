@@ -9,13 +9,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "transaction")
 public class TransactionBean {
-
+    /**
+     * Internal transaction id.
+     */
     @Id
     @Column(name = "transaction_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int transactionId;
 
+    /**
+     * Amount to be transferred to the target account.
+     */
     private double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,6 +35,9 @@ public class TransactionBean {
     @JoinColumn(name = "card_id")
     private CardBean card;
 
+    /**
+     * Custom comment a customer can give with a transaction.
+     */
     @Column(length = 128)
     private String comment;
 
