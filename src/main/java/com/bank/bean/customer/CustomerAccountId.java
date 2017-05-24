@@ -2,6 +2,9 @@ package com.bank.bean.customer;
 
 import java.io.Serializable;
 
+/**
+ * Class used for the many-to-many relation on customer-account.
+ */
 public class CustomerAccountId implements Serializable{
     private int customerId;
     private int accountId;
