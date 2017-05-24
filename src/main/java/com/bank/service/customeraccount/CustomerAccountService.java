@@ -1,22 +1,22 @@
-package com.bank.service.account;
+package com.bank.service.customeraccount;
 
-import com.bank.bean.customer.CustomerAccount;
-import com.bank.command.account.CustomerAccountCreateCommand;
+import com.bank.bean.customeraccount.CustomerAccount;
+import com.bank.command.customeraccount.CustomerAccountCreateCommand;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
-import com.bank.repository.account.AccountCustomerRepository;
+import com.bank.repository.customeraccount.CustomerAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AccountCustomerService {
+public class CustomerAccountService {
 
     @Autowired
-    AccountCustomerRepository accountCustomerRepository;
+    CustomerAccountRepository customerAccountRepository;
 
     public List<AccountCustomerDetailsProjection> getCustomersOfAccount(int accountId){
-        return accountCustomerRepository.findCustomerAccountsByAccountId(accountId);
+        return customerAccountRepository.findCustomerAccountsByAccountId(accountId);
     }
 
     public void addCustomerAccount(CustomerAccountCreateCommand command){
@@ -24,6 +24,6 @@ public class AccountCustomerService {
         customerAccount.setAccountId(command.getAccountId());
         customerAccount.setCustomerId(command.getCustomerId());
         customerAccount.setMain(command.isMain());
-        accountCustomerRepository.save(customerAccount);
+        customerAccountRepository.save(customerAccount);
     }
 }

@@ -1,6 +1,6 @@
 package com.bank.service.account;
 
-import com.bank.bean.customer.AccountBean;
+import com.bank.bean.account.AccountBean;
 import com.bank.command.account.AccountCreateCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.repository.account.AccountRepository;

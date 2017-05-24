@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerDetailsRepository extends CrudRepository<CustomerBean, Integer> {
+public interface CustomerInformationRepository extends CrudRepository<CustomerBean, Integer> {
 
     CustomerDetailsProjection findByCustomerId(int customerId);
 

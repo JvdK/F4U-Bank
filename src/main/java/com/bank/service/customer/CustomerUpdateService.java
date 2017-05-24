@@ -2,7 +2,7 @@ package com.bank.service.customer;
 
 import com.bank.bean.customer.CustomerBean;
 import com.bank.command.customer.CustomerUpdateCommand;
-import com.bank.repository.customer.CustomerUpdateRepository;
+import com.bank.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 public class CustomerUpdateService {
 
     @Autowired
-    private CustomerUpdateRepository customerUpdateRepository;
+    private CustomerRepository customerRepository;
 
     /**
      * Updates the customer with the customerId given. If fields are not set, they are not updated in the database
      * @param command update command
      */
     public void updateCustomer(CustomerUpdateCommand command) {
-        CustomerBean bean = customerUpdateRepository.findOne(command.getCustomerId());
+        CustomerBean bean = customerRepository.findOne(command.getCustomerId());
         if(command.getFirstName()!=null) {
             bean.setFirstName(command.getFirstName());
         }
@@ -45,7 +45,7 @@ public class CustomerUpdateService {
         if(command.getEmail()!=null) {
             bean.setEmail(command.getEmail());
         }
-        customerUpdateRepository.save(bean);
+        customerRepository.save(bean);
     }
 
 }

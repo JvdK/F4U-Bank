@@ -1,6 +1,6 @@
 package com.bank.service.customer;
 
-import com.bank.repository.customer.CustomerDeleteRepository;
+import com.bank.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 public class CustomerDeleteService {
 
     @Autowired
-    CustomerDeleteRepository customerDeleteRepository;
+    CustomerRepository customerRepository;
 
     public void deleteCustomer(int id){
-        customerDeleteRepository.deleteCustomer(id);
+        customerRepository.deleteCustomer(id);
     }
 }

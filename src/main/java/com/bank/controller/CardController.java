@@ -2,6 +2,7 @@ package com.bank.controller;
 
 import com.bank.bean.card.CardBean;
 import com.bank.command.card.CardAddCommand;
+import com.bank.exception.NotFoundException;
 import com.bank.service.card.CardCreateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,11 +22,12 @@ public class CardController {
             notes = "Adds a new card to the given account and customer. It is not needed that the customer is owner of the account. " +
                     "In other words it is possible that a user has a card of an account which he does not own.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Customer successfully added")
+            @ApiResponse(code = 200, message = "Customer successfully added"),
+            @ApiResponse(code = 404, message = "CustomerId or accountId not valid")
     })
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public void addCard(@RequestBody CardAddCommand command){
+    public void addCard(@RequestBody CardAddCommand command) throws NotFoundException {
         cardCreateService.addCard(command);
     }
 

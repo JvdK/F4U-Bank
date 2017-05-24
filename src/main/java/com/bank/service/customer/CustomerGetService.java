@@ -1,7 +1,7 @@
 package com.bank.service.customer;
 
 import com.bank.projection.customer.CustomerDetailsProjection;
-import com.bank.repository.customer.CustomerDetailsRepository;
+import com.bank.repository.customer.CustomerInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class CustomerGetService {
 
     @Autowired
-    CustomerDetailsRepository customerDetailsRepository;
+    CustomerInformationRepository customerInformationRepository;
 
     public CustomerDetailsProjection getCustomerById(int customerId){
-        return customerDetailsRepository.findByCustomerId(customerId);
+        return customerInformationRepository.findByCustomerId(customerId);
     }
 }

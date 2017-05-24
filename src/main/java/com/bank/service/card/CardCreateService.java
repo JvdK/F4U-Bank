@@ -2,6 +2,7 @@ package com.bank.service.card;
 
 import com.bank.bean.card.CardBean;
 import com.bank.command.card.CardAddCommand;
+import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.card.CardRepository;
 import com.bank.repository.customer.CustomerRepository;
@@ -22,13 +23,16 @@ public class CardCreateService {
     private AccountRepository accountRepository;
 
     @Transactional
-    public void addCard(CardAddCommand command){
+    public void addCard(CardAddCommand command) throws NotFoundException {
         CardBean bean = new CardBean();
         bean.setValid(command.isValid());
         bean.setCardNumber(command.getCardNumber());
         bean.setCustomerBean(customerRepository.findOne(command.getCustomerId()));
         bean.setAccountBean(accountRepository.findOne(command.getAccountId()));
 
+        if (bean.getCustomerBean() == null || bean.getAccountBean() == null) {
+            throw new NotFoundException();
+        }
         cardRepository.save(bean);
     }
 }

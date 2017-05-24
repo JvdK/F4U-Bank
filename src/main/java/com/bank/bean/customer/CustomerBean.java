@@ -191,15 +191,15 @@ public class CustomerBean {
 //    }
 //
 //    public void addAccout(AccountBean accountBean, boolean isMain) {
-//        CustomerAccount customerAccount = new CustomerAccount();
+//        CustomerAccount customeraccount = new CustomerAccount();
 //
-//        customerAccount.setAccountBean(accountBean);
-//        customerAccount.setAccountId(accountBean.getAccountId());
-//        customerAccount.setCustomerBean(this);
-//        customerAccount.setCustomerId(this.getCustomerId());
-//        customerAccount.setMain(isMain);
-//        this.accounts.add(customerAccount);
+//        customeraccount.setAccountBean(accountBean);
+//        customeraccount.setAccountId(accountBean.getAccountId());
+//        customeraccount.setCustomerBean(this);
+//        customeraccount.setCustomerId(this.getCustomerId());
+//        customeraccount.setMain(isMain);
+//        this.accounts.add(customeraccount);
 //
-//        accountBean.getCustomers().add(customerAccount);
+//        accountBean.getCustomers().add(customeraccount);
 //    }
 }

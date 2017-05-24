@@ -1,5 +1,6 @@
-package com.bank.bean.customer;
+package com.bank.bean.account;
 
+import com.bank.bean.customeraccount.CustomerAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
