@@ -1,4 +1,4 @@
-package com.bank.command.account;
+package com.bank.command.customeraccount;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

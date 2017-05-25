@@ -1,7 +1,6 @@
-package com.bank.repository.account;
+package com.bank.repository.customeraccount;
 
-import com.bank.bean.customer.CustomerAccount;
-import com.bank.bean.customer.CustomerAccountId;
+import com.bank.bean.customeraccount.CustomerAccount;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AccountCustomerRepository extends CrudRepository<CustomerAccount, Integer> {
+public interface CustomerAccountRepository extends CrudRepository<CustomerAccount, Integer> {
 
     List<AccountCustomerDetailsProjection> findCustomerAccountsByAccountId(int accountId);
 

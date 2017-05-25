@@ -1,17 +1,15 @@
 package com.bank.controller;
 
-import com.bank.bean.customer.AccountBean;
-import com.bank.bean.customer.CustomerAccount;
 import com.bank.command.account.AccountCreateCommand;
 import com.bank.command.account.AccountDeleteCommand;
-import com.bank.command.account.CustomerAccountCreateCommand;
+import com.bank.command.customeraccount.CustomerAccountCreateCommand;
 import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
 import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountCustomerDetailsProjection;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
-import com.bank.service.account.AccountCustomerService;
+import com.bank.service.customeraccount.CustomerAccountService;
 import com.bank.service.account.AccountDeleteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -34,7 +32,7 @@ public class AccountController {
     }
 
     @Autowired
-    private AccountCustomerService accountCustomersService;
+    private CustomerAccountService accountCustomersService;
 
     @Autowired
     private AccountAmountService accountAmountService;

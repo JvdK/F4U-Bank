@@ -1,4 +1,4 @@
-package com.bank.bean.customer;
+package com.bank.bean.customeraccount;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package com.bank.bean.transaction;
 
 import com.bank.bean.card.CardBean;
-import com.bank.bean.customer.AccountBean;
+import com.bank.bean.account.AccountBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.bank.service.transaction;
 
 import com.bank.bean.card.CardBean;
-import com.bank.bean.customer.AccountBean;
+import com.bank.bean.account.AccountBean;
 import com.bank.bean.transaction.TransactionBean;
 import com.bank.command.transaction.TransactionAddCommand;
 import com.bank.exception.BadRequestException;

@@ -1,6 +1,6 @@
 package com.bank.service.account;
 
-import com.bank.bean.customer.AccountBean;
+import com.bank.bean.account.AccountBean;
 import com.bank.command.account.AccountDeleteCommand;
 import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
