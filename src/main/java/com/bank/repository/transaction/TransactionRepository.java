@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TransactionBeanRepository extends CrudRepository<TransactionBean, Integer> {
+public interface TransactionRepository extends CrudRepository<TransactionBean, Integer> {
 
     List<TransactionInformationProjection> findTransactionBeansByTargetBeanOrSourceBean(AccountBean target, AccountBean source);
 

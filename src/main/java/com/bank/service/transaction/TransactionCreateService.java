@@ -9,7 +9,7 @@ import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.card.CardRepository;
 import com.bank.repository.customer.CustomerRepository;
-import com.bank.repository.transaction.TransactionBeanRepository;
+import com.bank.repository.transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-public class TransactionService {
+public class TransactionCreateService {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -29,7 +29,7 @@ public class TransactionService {
     private CardRepository cardRepository;
 
     @Autowired
-    private TransactionBeanRepository transactionBeanRepository;
+    private TransactionRepository transactionRepository;
 
     @Transactional
     public void doTransaction(TransactionAddCommand command) throws NotFoundException, BadRequestException {
@@ -60,7 +60,7 @@ public class TransactionService {
         bean.setAmount(command.getAmount());
         bean.setComment(command.getComment());
 
-        transactionBeanRepository.save(bean);
+        transactionRepository.save(bean);
 
     }
 

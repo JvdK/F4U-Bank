@@ -4,7 +4,7 @@ import com.bank.bean.account.AccountBean;
 import com.bank.exception.NotFoundException;
 import com.bank.projection.transaction.TransactionInformationProjection;
 import com.bank.repository.account.AccountRepository;
-import com.bank.repository.transaction.TransactionBeanRepository;
+import com.bank.repository.transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class TransactionGetService {
 
     @Autowired
-    private TransactionBeanRepository transactionBeanRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -24,7 +24,7 @@ public class TransactionGetService {
         if(bean == null){
             throw new NotFoundException();
         }
-        return transactionBeanRepository.findTransactionBeansByTargetBeanOrSourceBean(bean, bean);
+        return transactionRepository.findTransactionBeansByTargetBeanOrSourceBean(bean, bean);
     }
 
 }

@@ -5,7 +5,7 @@ import com.bank.exception.BadRequestException;
 import com.bank.exception.NotFoundException;
 import com.bank.projection.transaction.TransactionInformationProjection;
 import com.bank.service.transaction.TransactionGetService;
-import com.bank.service.transaction.TransactionService;
+import com.bank.service.transaction.TransactionCreateService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TransactionController {
 
     @Autowired
-    private TransactionService transactionService;
+    private TransactionCreateService transactionCreateService;
 
     @Autowired
     private TransactionGetService transactionGetService;
@@ -36,7 +36,7 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
     public void doTransaction(@RequestBody TransactionAddCommand command) throws NotFoundException, BadRequestException {
-        transactionService.doTransaction(command);
+        transactionCreateService.doTransaction(command);
     }
 
     @ApiOperation(value = "Used for getting the transactions of an account",
