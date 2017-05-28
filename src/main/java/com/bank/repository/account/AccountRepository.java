@@ -10,4 +10,5 @@ public interface AccountRepository extends CrudRepository<AccountBean, Integer> 
 
     AccountBean findAccountBeanByAccountIdAndIsActiveTrue(int accountId);
 
+    AccountBean findAccountBeanByAccountNumber(String accountNumber);
 }
