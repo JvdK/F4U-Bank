@@ -46,7 +46,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
     public void createCustomer(HttpSession session, @RequestBody CustomerCreateCommand command) throws BadRequestException {
-        customerCreateService.createCustomer(command);
+//        customerCreateService.createCustomer(command);
     }
 
     @ApiOperation(value = "Used to get customer details",
@@ -96,7 +96,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteCustomer(HttpSession session, @RequestBody CustomerDeleteCommand customerDeleteCommand) {
-        customerDeleteService.deleteCustomer(customerDeleteCommand.getCustomerId());
+//        customerDeleteService.deleteCustomer(customerDeleteCommand.getCustomerId());
     }
 
 

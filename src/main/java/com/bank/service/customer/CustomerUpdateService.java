@@ -18,35 +18,35 @@ public class CustomerUpdateService {
      * @param command update command
      */
     public void updateCustomer(CustomerUpdateCommand command) {
-        CustomerBean bean = customerRepository.findOne(command.getCustomerId());
-        if (command.getFirstName() != null) {
-            bean.setFirstName(command.getFirstName());
-        }
-        if (command.getLastName() != null) {
-            bean.setLastName(command.getLastName());
-        }
-        if (command.getInitials() != null) {
-            bean.setInitials(command.getInitials());
-        }
-        if (command.getAddress() != null) {
-            bean.setAddress(command.getAddress());
-        }
-        if (command.getPhone() != null) {
-            bean.setPhone(command.getPhone());
-        }
-        if (command.getPostalCode() != null) {
-            bean.setPostalCode(command.getPostalCode());
-        }
-        if (command.getCity() != null) {
-            bean.setCity(command.getCity());
-        }
-        if (command.getCountry() != null) {
-            bean.setCountry(command.getCountry());
-        }
-        if (command.getEmail() != null) {
-            bean.setEmail(command.getEmail());
-        }
-        customerRepository.save(bean);
+//        CustomerBean bean = customerRepository.findOne(command.getCustomerId());
+//        if (command.getFirstName() != null) {
+//            bean.setFirstName(command.getFirstName());
+//        }
+//        if (command.getLastName() != null) {
+//            bean.setLastName(command.getLastName());
+//        }
+//        if (command.getInitials() != null) {
+//            bean.setInitials(command.getInitials());
+//        }
+//        if (command.getAddress() != null) {
+//            bean.setAddress(command.getAddress());
+//        }
+//        if (command.getPhone() != null) {
+//            bean.setPhone(command.getPhone());
+//        }
+//        if (command.getPostalCode() != null) {
+//            bean.setPostalCode(command.getPostalCode());
+//        }
+//        if (command.getCity() != null) {
+//            bean.setCity(command.getCity());
+//        }
+//        if (command.getCountry() != null) {
+//            bean.setCountry(command.getCountry());
+//        }
+//        if (command.getEmail() != null) {
+//            bean.setEmail(command.getEmail());
+//        }
+//        customerRepository.save(bean);
     }
 
 }

@@ -10,7 +10,7 @@ public class CustomerDeleteService {
     @Autowired
     CustomerRepository customerRepository;
 
-    public void deleteCustomer(int id){
-        customerRepository.deleteCustomer(id);
-    }
+//    public void deleteCustomer(int id){
+//        customerRepository.deleteCustomer(id);
+//    }
 }

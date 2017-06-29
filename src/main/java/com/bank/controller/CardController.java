@@ -28,7 +28,7 @@ public class CardController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
     public void addCard(@RequestBody CardAddCommand command) throws NotFoundException {
-        cardCreateService.addCard(command);
+//        cardCreateService.addCard(command);
     }
 
 

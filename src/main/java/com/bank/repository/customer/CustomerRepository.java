@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface CustomerRepository extends CrudRepository<CustomerBean, Integer> {
 
-    @Modifying
-    @Transactional
-    @Query("update CustomerBean bean set bean.isActive = false where bean.customerId = :customerId")
-    public void deleteCustomer(@Param("customerId") int customerId);
+//    @Modifying
+//    @Transactional
+//    @Query("update CustomerBean bean set bean.isActive = false where bean.customerId = :customerId")
+//    public void deleteCustomer(@Param("customerId") int customerId);
 
 }

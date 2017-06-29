@@ -24,7 +24,7 @@ public class AccountBean {
     /**
      * Account id, unique string.
      */
-    @Column(name = "account_number")
+    @Column(name = "account_number", unique = true)
     private String accountNumber;
 
     /**
@@ -33,11 +33,11 @@ public class AccountBean {
     @JsonIgnore
     private double amount;
 
-    /**
-     * Indicates whether the account is active or not.
-     */
-    @Column(name = "is_active")
-    private boolean isActive;
+//    /**
+//     * Indicates whether the account is active or not.
+//     */
+//    @Column(name = "is_active")
+//    private boolean isActive;
 
     /**
      * List of customers that are owner of the account.
@@ -70,13 +70,13 @@ public class AccountBean {
         this.amount = amount;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
+//    public boolean isActive() {
+//        return isActive;
+//    }
+//
+//    public void setActive(boolean active) {
+//        isActive = active;
+//    }
 
     public List<CustomerAccount> getCustomers() {
         return customers;

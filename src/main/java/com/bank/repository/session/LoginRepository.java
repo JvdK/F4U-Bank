@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface LoginRepository extends CrudRepository<CustomerBean, Integer> {
 
-    CustomerLoginProjection findByUserNameAndIsActiveTrue(String username);
+//    CustomerLoginProjection findByUserNameAndIsActiveTrue(String username);
 }

@@ -19,15 +19,16 @@ public class SessionLoginService {
      * @return userId of the customer if name and password correspond, -1 if they do not or customer is not active.
      */
     public int checkLogin(String username, String password){
-        CustomerLoginProjection bean = loginRepository.findByUserNameAndIsActiveTrue(username);
-        if(bean==null){
-            return -1;
-        }
-        if (bean.getPassword().equals(password)){
-            return bean.getCustomerId();
-        }else{
-            return -1;
-        }
+//        CustomerLoginProjection bean = loginRepository.findByUserNameAndIsActiveTrue(username);
+//        if(bean==null){
+//            return -1;
+//        }
+//        if (bean.getPassword().equals(password)){
+//            return bean.getCustomerId();
+//        }else{
+//            return -1;
+//        }
+        return -1;
     }
 
 }
