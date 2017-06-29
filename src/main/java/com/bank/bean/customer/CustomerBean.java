@@ -9,7 +9,7 @@ import java.util.Date;
  * The Customer class contains all relevant data field for a customer.
  */
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", uniqueConstraints= @UniqueConstraint(columnNames={"user_name"}))
 public class CustomerBean {
     /**
      * Internal customer id.
@@ -58,7 +58,7 @@ public class CustomerBean {
     /**
      * User name for customer they can use for authentication.
      */
-    @Column(name = "user_name", unique = true)
+    @Column(name = "user_name", unique = true, nullable = false)
     private String username;
     /**
      * Password of the customer
