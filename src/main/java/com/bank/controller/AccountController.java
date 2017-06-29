@@ -3,6 +3,7 @@ package com.bank.controller;
 import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.CustomerBean;
 import com.bank.exception.InvalidParamValueError;
+import com.bank.projection.account.AccountOpenProjection;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
 import com.bank.service.customer.CustomerCreateService;
@@ -43,16 +44,16 @@ public class AccountController {
             @JsonRpcError(exception=InvalidParamValueError.class, code=418),
             @JsonRpcError(exception=Throwable.class,code=-187)
     })
-    public CardBean openAccount(@JsonRpcParam("name") String name,
-                                @JsonRpcParam("surname") String surname,
-                                @JsonRpcParam("initials") String initials,
-                                @JsonRpcParam("dob") Date date,
-                                @JsonRpcParam("ssn") String ssn,
-                                @JsonRpcParam("address") String address,
-                                @JsonRpcParam("telephoneNumber") String telephoneNumber,
-                                @JsonRpcParam("email") String email,
-                                @JsonRpcParam("username") String username,
-                                @JsonRpcParam("password") String password) throws InvalidParamValueError {
+    public AccountOpenProjection openAccount(@JsonRpcParam("name") String name,
+                                             @JsonRpcParam("surname") String surname,
+                                             @JsonRpcParam("initials") String initials,
+                                             @JsonRpcParam("dob") Date date,
+                                             @JsonRpcParam("ssn") String ssn,
+                                             @JsonRpcParam("address") String address,
+                                             @JsonRpcParam("telephoneNumber") String telephoneNumber,
+                                             @JsonRpcParam("email") String email,
+                                             @JsonRpcParam("username") String username,
+                                             @JsonRpcParam("password") String password) throws InvalidParamValueError {
 
         CustomerBean customerBean = new CustomerBean();
         customerBean.setName(name);
@@ -68,8 +69,13 @@ public class AccountController {
 
         customerCreateService.createCustomer(customerBean);
 
-        return accountCreateService.createAccount(customerBean, true);
+        CardBean cardBean = accountCreateService.createAccount(customerBean, true);
 
+        AccountOpenProjection projection = new AccountOpenProjection();
+        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
+        projection.setPinCard(cardBean.getPinCard());
+        projection.setPinCode(cardBean.getPinCode());
+        return projection;
 //        accountCreateService.createAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
 
     }

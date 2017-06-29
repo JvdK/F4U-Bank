@@ -31,13 +31,15 @@ public class CardCreateService {
      * @param customerBean the customer
      * @param accountBean the account
      * @return The cardBean
-     * @throws NotFoundException
      */
     @Transactional
     public CardBean addCard(CustomerBean customerBean, AccountBean accountBean) {
         CardBean bean = new CardBean();
         bean.setPinCard(RandomStringGenerator.generateRandomIntegerString(4));
         bean.setPinCode(RandomStringGenerator.generateRandomIntegerString(4));
+        bean.setAccountBean(accountBean);
+        bean.setCustomerBean(customerBean);
+
         cardRepository.save(bean);
         return bean;
     }

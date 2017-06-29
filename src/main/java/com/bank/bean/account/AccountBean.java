@@ -46,7 +46,7 @@ public class AccountBean {
     @OneToMany(mappedBy = "accountBean")
     private List<CustomerAccount> customers;
 
-    int getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
@@ -85,4 +85,6 @@ public class AccountBean {
     public void setCustomers(List<CustomerAccount> customers) {
         this.customers = customers;
     }
+
+
 }

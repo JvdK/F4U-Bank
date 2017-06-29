@@ -46,8 +46,9 @@ public class AccountCreateService {
         accountRepository.save(accountBean);
 
         CustomerAccount customerAccount = new CustomerAccount();
-        customerAccount.setAccountBean(accountBean);
-        customerAccount.setCustomerBean(customerBean);
+        customerAccount.setAccountId(accountBean.getAccountId());
+        customerAccount.setCustomerId(customerBean.getCustomerId());
+
         customerAccount.setMain(isMain);
 
         customerAccountRepository.save(customerAccount);
