@@ -31,8 +31,7 @@ public class AccountController {
 
 
     @JsonRpcErrors({
-            @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
-            @JsonRpcError(exception = Throwable.class, code = -187)
+            @JsonRpcError(exception = InvalidParamValueError.class, code = 418)
     })
     public AccountOpenProjection openAccount(@JsonRpcParam("name") String name,
                                              @JsonRpcParam("surname") String surname,
@@ -46,74 +45,5 @@ public class AccountController {
                                              @JsonRpcParam("password") String password) throws InvalidParamValueError {
         return accountOpenService.openAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
     }
-
-
-//    @ApiOperation(value = "Used to create a new account. ",
-//            notes = "Used to create a new account.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Account successfully added")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(method = RequestMethod.PUT)
-//    public void createAccount(HttpSession session, @RequestBody AccountCreateCommand command) throws BadRequestException {
-//        accountCreateService.createAccount(command);
-//    }
-
-//    @ApiOperation(value = "Used to delete an account",
-//            notes = "This does not remove the account from the database. The account will be made inactive. This keeps the " +
-//                    "foreign keys intact.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Account successfully deleted"),
-//            @ApiResponse(code = 404, message = "Account not found")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(method = RequestMethod.DELETE)
-//    public void deleteAccount(HttpSession session, @RequestBody AccountDeleteCommand accountDeleteCommand) throws NotFoundException {
-//        accountDeleteService.deleteAccount(accountDeleteCommand);
-//    }
-//
-//    @ApiOperation(value = "Used to get the amount on the account",
-//            notes = "Gets the amount currently stored on the given account. ")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Account successfully deleted")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/amount/{accountId}", method = RequestMethod.GET)
-//    public AccountAmountProjection getAmount(@PathVariable int accountId) {
-//        return accountAmountService.getAmountOfAccount(accountId);
-//    }
-//
-//    @ApiOperation(value = "Used to get all the users on this account",
-//            notes = "Returns a list of all the users currently assigned to this account.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Account successfully deleted")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/customers/{accountId}", method = RequestMethod.GET)
-//    public List<AccountCustomerDetailsProjection> getCustomers(@PathVariable("accountId") int accountId) {
-//        return accountCustomersService.getCustomersOfAccount(accountId);
-//    }
-//
-//    @ApiOperation(value = "Used to get all the cards on this account",
-//            notes = "Returns a list of all the cards currently assigned to this account.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Account successfully deleted")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/cards/{accountId}", method = RequestMethod.GET)
-//    public void getCards() {
-//        //TODO implement this
-//    }
-//
-//    @ApiOperation(value = "Used to add a customer to a given account",
-//            notes = "Adds the customer the given account")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Customer successfully added to account")
-//    })
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
-//    public void addCustomerToAccount(@RequestBody CustomerAccountCreateCommand command) {
-//        accountCustomersService.addCustomerAccount(command);
-//    }
 
 }

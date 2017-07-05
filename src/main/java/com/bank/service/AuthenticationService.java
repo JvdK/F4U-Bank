@@ -7,6 +7,9 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 
 public final class AuthenticationService {
+
+    public static AuthenticationService instance = new AuthenticationService();
+
     private final HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>();
 
     private SecureRandom random = new SecureRandom();
