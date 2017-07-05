@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@JsonRpcService("/api/login")
-@AutoJsonRpcServiceImpl
+//@JsonRpcService("/api/iets")
+//@AutoJsonRpcServiceImpl
 public class SessionController {
 
     @Autowired

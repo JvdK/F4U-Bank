@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 
 @Service
-@JsonRpcService("/api")
-@AutoJsonRpcServiceImpl
+//@JsonRpcService("/api")
+//@AutoJsonRpcServiceImpl
 public class AccountController {
 
 
@@ -33,16 +33,16 @@ public class AccountController {
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418)
     })
-    public AccountOpenProjection openAccount(@JsonRpcParam("name") String name,
-                                             @JsonRpcParam("surname") String surname,
-                                             @JsonRpcParam("initials") String initials,
-                                             @JsonRpcParam("dob") Date date,
-                                             @JsonRpcParam("ssn") String ssn,
-                                             @JsonRpcParam("address") String address,
-                                             @JsonRpcParam("telephoneNumber") String telephoneNumber,
-                                             @JsonRpcParam("email") String email,
-                                             @JsonRpcParam("username") String username,
-                                             @JsonRpcParam("password") String password) throws InvalidParamValueError {
+    public AccountOpenProjection openAccount(String name,
+                                             String surname,
+                                             String initials,
+                                             java.util.Date date,
+                                             String ssn,
+                                             String address,
+                                             String telephoneNumber,
+                                             String email,
+                                             String username,
+                                             String password) throws InvalidParamValueError {
         return accountOpenService.openAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
     }
 
