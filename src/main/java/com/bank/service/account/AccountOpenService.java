@@ -1,0 +1,73 @@
+package com.bank.service.account;
+
+import com.bank.bean.card.CardBean;
+import com.bank.bean.customer.CustomerBean;
+import com.bank.exception.InvalidParamValueError;
+import com.bank.projection.account.AccountOpenProjection;
+import com.bank.service.customer.CustomerCreateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@Service
+public class AccountOpenService {
+
+
+    @Autowired
+    private CustomerCreateService customerCreateService;
+
+    @Autowired
+    private AccountCreateService accountCreateService;
+
+    /**
+     * Opens an account. This creates a new customer, new account and a new pin card.
+     *
+     * @param name
+     * @param surname
+     * @param initials
+     * @param date
+     * @param ssn
+     * @param address
+     * @param telephoneNumber
+     * @param email
+     * @param username
+     * @param password
+     * @return projection containing the account id and pin number with pin code
+     * @throws InvalidParamValueError when parameters are not correct
+     */
+    public AccountOpenProjection openAccount(String name,
+                                             String surname,
+                                             String initials,
+                                             Date date,
+                                             String ssn,
+                                             String address,
+                                             String telephoneNumber,
+                                             String email,
+                                             String username,
+                                             String password) throws InvalidParamValueError {
+
+        CustomerBean customerBean = new CustomerBean();
+        customerBean.setName(name);
+        customerBean.setSurname(surname);
+        customerBean.setInitials(initials);
+        customerBean.setDob(date);
+        customerBean.setSsn(ssn);
+        customerBean.setAddress(address);
+        customerBean.setTelephoneNumber(telephoneNumber);
+        customerBean.setEmail(email);
+        customerBean.setUsername(username);
+        customerBean.setPassword(password);
+
+        customerCreateService.createCustomer(customerBean);
+
+        CardBean cardBean = accountCreateService.createAccount(customerBean, true);
+
+        AccountOpenProjection projection = new AccountOpenProjection();
+        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
+        projection.setPinCard(cardBean.getPinCard());
+        projection.setPinCode(cardBean.getPinCode());
+        return projection;
+    }
+
+}

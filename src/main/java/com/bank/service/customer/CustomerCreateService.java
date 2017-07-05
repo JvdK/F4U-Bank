@@ -19,28 +19,6 @@ public class CustomerCreateService {
         this.customerRepository = customerRepository;
     }
 
-//    public void createCustomer(CustomerCreateCommand command) throws BadRequestException {
-//        try {
-//            CustomerBean bean = new CustomerBean();
-//            bean.setUserName(command.getUserName());
-//            bean.setPassword(command.getPassword());
-//            bean.setFirstName(command.getFirstName());
-//            bean.setLastName(command.getLastName());
-//            bean.setInitials(command.getInitials());
-//            bean.setDateOfBirth(command.getDateOfBirth());
-//            bean.setAddress(command.getAddress());
-//            bean.setPhone(command.getPhone());
-//            bean.setPostalCode(command.getPostalCode());
-//            bean.setCity(command.getCity());
-//            bean.setCountry(command.getCountry());
-//            bean.setEmail(command.getEmail());
-//            bean.setActive(true);
-//            customerRepository.save(bean);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new BadRequestException();
-//        }
-//
-//    }
 
     public void createCustomer(CustomerBean customerBean) throws InvalidParamValueError {
         try {

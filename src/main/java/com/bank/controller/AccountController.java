@@ -6,6 +6,7 @@ import com.bank.exception.InvalidParamValueError;
 import com.bank.projection.account.AccountOpenProjection;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
+import com.bank.service.account.AccountOpenService;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customeraccount.CustomerAccountService;
 import com.bank.service.account.AccountDeleteService;
@@ -24,25 +25,14 @@ import java.sql.Date;
 @AutoJsonRpcServiceImpl
 public class AccountController {
 
-    @Autowired
-    private AccountCreateService accountCreateService;
 
     @Autowired
-    private CustomerAccountService accountCustomersService;
-
-    @Autowired
-    private AccountAmountService accountAmountService;
-
-    @Autowired
-    private AccountDeleteService accountDeleteService;
-
-    @Autowired
-    private CustomerCreateService customerCreateService;
+    private AccountOpenService accountOpenService;
 
 
     @JsonRpcErrors({
-            @JsonRpcError(exception=InvalidParamValueError.class, code=418),
-            @JsonRpcError(exception=Throwable.class,code=-187)
+            @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
+            @JsonRpcError(exception = Throwable.class, code = -187)
     })
     public AccountOpenProjection openAccount(@JsonRpcParam("name") String name,
                                              @JsonRpcParam("surname") String surname,
@@ -54,30 +44,7 @@ public class AccountController {
                                              @JsonRpcParam("email") String email,
                                              @JsonRpcParam("username") String username,
                                              @JsonRpcParam("password") String password) throws InvalidParamValueError {
-
-        CustomerBean customerBean = new CustomerBean();
-        customerBean.setName(name);
-        customerBean.setSurname(surname);
-        customerBean.setInitials(initials);
-        customerBean.setDob(date);
-        customerBean.setSsn(ssn);
-        customerBean.setAddress(address);
-        customerBean.setTelephoneNumber(telephoneNumber);
-        customerBean.setEmail(email);
-        customerBean.setUsername(username);
-        customerBean.setPassword(password);
-
-        customerCreateService.createCustomer(customerBean);
-
-        CardBean cardBean = accountCreateService.createAccount(customerBean, true);
-
-        AccountOpenProjection projection = new AccountOpenProjection();
-        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
-        projection.setPinCard(cardBean.getPinCard());
-        projection.setPinCode(cardBean.getPinCode());
-        return projection;
-//        accountCreateService.createAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
-
+        return accountOpenService.openAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
     }
 
 
