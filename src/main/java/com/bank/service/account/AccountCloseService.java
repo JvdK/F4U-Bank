@@ -25,21 +25,14 @@ public class AccountCloseService {
     @Autowired
     private CustomerCloseService customerCloseService;
 
-    public void closeAccount(String IBAN, int customerId){
+    public void closeAccount(String IBAN, int customerId) {
         accountRepository.closeAccount(IBAN);
         // invalidate pincards
         int accountId = accountRepository.findAccountBeanByAccountNumber(IBAN).getAccountId();
         cardRepository.invalidatePinCards(accountId);
         // if last account, invalidate customer account
         List<CustomerAccount> customerAccounts = customerAccountRepository.getActiveCustomerAcounts(customerId);
-//        boolean stillAccountLeft = false;
-//        for(CustomerAccount c : customerAccounts){
-//            if(c.getAccountBean().isActive()){
-//                stillAccountLeft = true;
-//                break;
-//            }
-//        }
-        if(customerAccounts.size()==0){
+        if (customerAccounts.size() == 0) {
             customerCloseService.closeCustomer(customerId);
         }
 
