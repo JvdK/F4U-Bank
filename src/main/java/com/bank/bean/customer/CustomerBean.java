@@ -65,6 +65,16 @@ public class CustomerBean {
      */
     private String password;
 
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public int getCustomerId() {
         return customerId;

@@ -7,12 +7,9 @@ import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NotAuthorizedException;
 import com.bank.projection.account.AccountOpenProjection;
 import com.bank.service.AuthenticationService;
-import com.bank.service.account.AccountCreateService;
-import com.bank.service.account.AccountAmountService;
-import com.bank.service.account.AccountOpenService;
+import com.bank.service.account.*;
 import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customeraccount.CustomerAccountService;
-import com.bank.service.account.AccountDeleteService;
 import com.googlecode.jsonrpc4j.JsonRpcError;
 import com.googlecode.jsonrpc4j.JsonRpcErrors;
 import com.googlecode.jsonrpc4j.JsonRpcParam;
@@ -28,9 +25,14 @@ import java.sql.Date;
 //@AutoJsonRpcServiceImpl
 public class AccountController {
 
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private AccountOpenService accountOpenService;
+
+    @Autowired
+    private AccountCloseService accountCloseService;
 
 
     @JsonRpcErrors({
@@ -56,6 +58,20 @@ public class AccountController {
         } catch (AuthenticationException e) {
             throw new NotAuthorizedException("Invalid authToken");
         }
+    }
+
+    public void closeAccount(String authToken, String IBAN) throws InvalidParamValueError, NotAuthorizedException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if (accountService.checkIfIsMainAccountHolder(IBAN, customerId)) {
+                accountCloseService.closeAccount(IBAN, customerId);
+            } else {
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+
     }
 
 }

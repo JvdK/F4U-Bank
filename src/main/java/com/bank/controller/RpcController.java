@@ -3,6 +3,7 @@ package com.bank.controller;
 
 import com.bank.exception.*;
 import com.bank.service.account.AccountOpenService;
+import com.bank.util.EmptyJsonResponse;
 import com.googlecode.jsonrpc4j.JsonRpcError;
 import com.googlecode.jsonrpc4j.JsonRpcErrors;
 import com.googlecode.jsonrpc4j.JsonRpcParam;
@@ -51,8 +52,9 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object closeAccount(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN){
-        return null;
+    public Object closeAccount(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN) throws InvalidParamValueError, NotAuthorizedException {
+        accountController.closeAccount(authToken, IBAN);
+        return new EmptyJsonResponse();
     }
 
 
