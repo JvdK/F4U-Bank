@@ -61,8 +61,17 @@ public class AccountOpenService {
 
         customerCreateService.createCustomer(customerBean);
 
-        CardBean cardBean = accountCreateService.createAccount(customerBean, true);
+        CardBean cardBean = accountCreateService.createAccount(customerBean.getCustomerId(), true);
 
+        AccountOpenProjection projection = new AccountOpenProjection();
+        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
+        projection.setPinCard(cardBean.getPinCard());
+        projection.setPinCode(cardBean.getPinCode());
+        return projection;
+    }
+
+    public AccountOpenProjection openAdditionalAccount(int customerId){
+        CardBean cardBean = accountCreateService.createAccount(customerId, true);
         AccountOpenProjection projection = new AccountOpenProjection();
         projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
         projection.setPinCard(cardBean.getPinCard());

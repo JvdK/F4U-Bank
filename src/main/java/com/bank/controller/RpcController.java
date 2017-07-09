@@ -43,8 +43,8 @@ public class RpcController {
     @JsonRpcErrors({
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object openAdditionalAccount(@JsonRpcParam("authToken") String authToken) {
-        return null;
+    public Object openAdditionalAccount(@JsonRpcParam("authToken") String authToken) throws NotAuthorizedException {
+        return accountController.openAdditionalAccount(authToken);
     }
 
     @JsonRpcErrors({

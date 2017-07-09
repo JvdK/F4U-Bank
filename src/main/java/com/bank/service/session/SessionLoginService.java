@@ -21,7 +21,7 @@ public class SessionLoginService {
 
     public boolean checkLogin(String username, String password) {
         SessionPasswordProjection sessionPasswordProjection = loginRepository.findByUsername(username);
-        return sessionPasswordProjection.getPassword() != null && sessionPasswordProjection.getPassword().equals(password);
+        return sessionPasswordProjection != null && sessionPasswordProjection.getPassword() != null && sessionPasswordProjection.getPassword().equals(password);
     }
 
     public SessionAuthTokenProjection getAuthToken(String username, String password) throws AuthenticationException {

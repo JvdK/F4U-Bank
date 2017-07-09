@@ -10,6 +10,7 @@ import com.bank.repository.account.AccountRepository;
 import com.bank.repository.customeraccount.CustomerAccountRepository;
 import com.bank.service.IBANGeneratorService;
 import com.bank.service.card.CardCreateService;
+import com.bank.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,27 +35,29 @@ public class AccountCreateService {
     @Autowired
     private CardCreateService cardCreateService;
 
+    @Autowired
+    private CustomerService customerService;
+
     /**
      * Creates a new account and links it to the given customerAccount. It also creates a new pin and assings it.
-     * @param customerBean
      * @param isMain
      * @throws BadRequestException
      */
-    public CardBean createAccount(CustomerBean customerBean, boolean isMain) {
+    public CardBean createAccount(int customerId, boolean isMain) {
         AccountBean accountBean = new AccountBean();
         accountBean.setAccountNumber(ibanGeneratorService.generateIBAN());
         accountRepository.save(accountBean);
 
         CustomerAccount customerAccount = new CustomerAccount();
         customerAccount.setAccountId(accountBean.getAccountId());
-        customerAccount.setCustomerId(customerBean.getCustomerId());
+        customerAccount.setCustomerId(customerId);
 
         customerAccount.setMain(isMain);
 
         customerAccountRepository.save(customerAccount);
 
         // create pin
-        return cardCreateService.addCard(customerBean, accountBean);
+        return cardCreateService.addCard(customerService.getCustomerBeanById(customerId), accountBean);
     }
 
     public void createAccount(String name,

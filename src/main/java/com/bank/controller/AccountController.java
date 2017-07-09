@@ -2,8 +2,11 @@ package com.bank.controller;
 
 import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.CustomerBean;
+import com.bank.exception.AuthenticationException;
 import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.NotAuthorizedException;
 import com.bank.projection.account.AccountOpenProjection;
+import com.bank.service.AuthenticationService;
 import com.bank.service.account.AccountCreateService;
 import com.bank.service.account.AccountAmountService;
 import com.bank.service.account.AccountOpenService;
@@ -44,6 +47,15 @@ public class AccountController {
                                              String username,
                                              String password) throws InvalidParamValueError {
         return accountOpenService.openAccount(name, surname, initials, date, ssn, address, telephoneNumber, email, username, password);
+    }
+
+    public AccountOpenProjection openAdditionalAccount(String authToken) throws NotAuthorizedException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            return accountOpenService.openAdditionalAccount(customerId);
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Invalid authToken");
+        }
     }
 
 }

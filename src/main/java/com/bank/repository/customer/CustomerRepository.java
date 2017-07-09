@@ -16,4 +16,6 @@ public interface CustomerRepository extends CrudRepository<CustomerBean, Integer
 //    @Query("update CustomerBean bean set bean.isActive = false where bean.customerId = :customerId")
 //    public void deleteCustomer(@Param("customerId") int customerId);
 
+    CustomerBean getCustomerBeanByCustomerId(int customerId);
+
 }
