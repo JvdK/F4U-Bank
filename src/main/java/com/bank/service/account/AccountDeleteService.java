@@ -18,7 +18,7 @@ public class AccountDeleteService {
         if(bean == null){
             throw new NotFoundException();
         }
-        bean.setActive(false);
+//        bean.setActive(false);
         accountRepository.save(bean);
     }
 

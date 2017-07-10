@@ -9,7 +9,7 @@ import java.util.Date;
  * The Customer class contains all relevant data field for a customer.
  */
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", uniqueConstraints= @UniqueConstraint(columnNames={"user_name"}))
 public class CustomerBean {
     /**
      * Internal customer id.
@@ -21,83 +21,60 @@ public class CustomerBean {
     private int customerId;
 
     /**
-     * User name for customer they can use for authentication.
+     * First name of the customer
      */
-    @Column(name = "user_name", nullable = false, length = 20)
-    private String userName;
-
+    private String name;
     /**
-     * Password for customer they can use for authentication.
+     * Last name of the customer
      */
-    private String password;
-
+    private String surname;
     /**
-     * Full first name of the customer.
-     */
-    @Column(name = "first_name")
-    private String firstName;
-
-    /**
-     * Full last name of the customer.
-     */
-    @Column(name = "last_name")
-    private String lastName;
-
-    /**
-     * Initials of the first names of the customer.
+     * Initials of the customer
      */
     private String initials;
-
     /**
-     * Date the customer was born.
+     * Date-of-birth of the customer
      */
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
-
+    private Date dob;
     /**
-     * Date and time the customer was added to the database.
+     * ssn of the customer
      */
-    @JsonIgnore
-    @Column(name = "date_of_creation", updatable = false)
-    private Date dateOfCreation;
+    private String ssn;
 
     /**
      * Full street, house number and optional additions to the house number, currently no validation is implemented.
      */
     private String address;
-
     /**
      * Phone number of the customer, currently no validation is implemented.
      */
-    private String phone;
-
-    /**
-     * Postal code or zip code of the address of the customer, currently no validation is implemented.
-     */
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    /**
-     * City the customer currently lives in, currently no validation is implemented.
-     */
-    private String city;
-
-    /**
-     * Country of the customer, currently no validation or normalisation is implemented.
-     */
-    private String country;
+    @Column(name = "telephone_number")
+    private String telephoneNumber;
 
     /**
      * Email address of the customer, currently no validation is implemented.
      */
     private String email;
-
     /**
-     * Indicates whether the customer account is active or not.
+     * User name for customer they can use for authentication.
      */
-    @JsonIgnore
-    @Column(name = "is_active")
-    private boolean isActive = false;
+    @Column(name = "user_name", unique = true, nullable = false)
+    private String username;
+    /**
+     * Password of the customer
+     */
+    private String password;
+
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -107,28 +84,20 @@ public class CustomerBean {
         this.customerId = customerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getInitials() {
@@ -139,20 +108,20 @@ public class CustomerBean {
         this.initials = initials;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public Date getDateOfCreation() {
-        return dateOfCreation;
+    public String getSsn() {
+        return ssn;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
     }
 
     public String getAddress() {
@@ -163,36 +132,12 @@ public class CustomerBean {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
     public String getEmail() {
@@ -203,25 +148,19 @@ public class CustomerBean {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    @PrePersist
-    void dateOfCreation() {
-        this.dateOfCreation = new Date();
-
     }
 }

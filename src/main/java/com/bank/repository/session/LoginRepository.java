@@ -3,6 +3,7 @@ package com.bank.repository.session;
 import com.bank.bean.customer.CustomerBean;
 import com.bank.bean.session.LoginBean;
 import com.bank.projection.customer.CustomerLoginProjection;
+import com.bank.projection.session.SessionPasswordProjection;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -10,5 +11,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface LoginRepository extends CrudRepository<CustomerBean, Integer> {
 
-    CustomerLoginProjection findByUserNameAndIsActiveTrue(String username);
+    SessionPasswordProjection findByUsername(String username);
 }

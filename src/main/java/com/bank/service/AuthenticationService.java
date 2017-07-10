@@ -7,6 +7,11 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 
 public final class AuthenticationService {
+
+    public static final String USERID = "userId";
+
+    public static AuthenticationService instance = new AuthenticationService();
+
     private final HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>();
 
     private SecureRandom random = new SecureRandom();
@@ -18,7 +23,7 @@ public final class AuthenticationService {
     public final String login(int userId) {
         String token = generateToken();
         map.put(token, new HashMap<String, Object>());
-        map.get(token).put("userId", userId);
+        map.get(token).put(USERID, userId);
 
         return token;
     }

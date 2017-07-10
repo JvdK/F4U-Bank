@@ -14,4 +14,9 @@ public class CustomerGetService {
     public CustomerDetailsProjection getCustomerById(int customerId){
         return customerInformationRepository.findByCustomerId(customerId);
     }
+
+
+    public int getCustomerId(String username){
+        return customerInformationRepository.findByUsername(username).getCustomerId();
+    }
 }

@@ -12,7 +12,7 @@ public class AccountAmountService {
     @Autowired
     AccountAmountRepository accountAmountRepository;
 
-    public AccountAmountProjection getAmountOfAccount(int accountId){
-        return accountAmountRepository.findAccountBeanByAccountIdAndIsActiveTrue(accountId);
-    }
+//    public AccountAmountProjection getAmountOfAccount(int accountId){
+//        return accountAmountRepository.findAccountBeanByAccountIdAndIsActiveTrue(accountId);
+//    }
 }

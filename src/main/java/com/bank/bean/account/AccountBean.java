@@ -24,7 +24,7 @@ public class AccountBean {
     /**
      * Account id, unique string.
      */
-    @Column(name = "account_number")
+    @Column(name = "account_number", unique = true)
     private String accountNumber;
 
     /**
@@ -36,8 +36,8 @@ public class AccountBean {
     /**
      * Indicates whether the account is active or not.
      */
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
 
     /**
      * List of customers that are owner of the account.
@@ -46,7 +46,7 @@ public class AccountBean {
     @OneToMany(mappedBy = "accountBean")
     private List<CustomerAccount> customers;
 
-    int getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
@@ -85,4 +85,6 @@ public class AccountBean {
     public void setCustomers(List<CustomerAccount> customers) {
         this.customers = customers;
     }
+
+
 }

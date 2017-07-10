@@ -15,9 +15,9 @@ public class CustomerAccountService {
     @Autowired
     CustomerAccountRepository customerAccountRepository;
 
-    public List<AccountCustomerDetailsProjection> getCustomersOfAccount(int accountId){
-        return customerAccountRepository.findCustomerAccountsByAccountId(accountId);
-    }
+//    public List<AccountCustomerDetailsProjection> getCustomersOfAccount(int accountId){
+//        return customerAccountRepository.findCustomerAccountsByAccountId(accountId);
+//    }
 
     public void addCustomerAccount(CustomerAccountCreateCommand command){
         CustomerAccount customerAccount = new CustomerAccount();

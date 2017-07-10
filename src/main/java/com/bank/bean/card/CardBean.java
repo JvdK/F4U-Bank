@@ -22,15 +22,11 @@ public class CardBean {
     /**
      * The number on the card.
      */
-    @Column(name = "card_number")
-    private int cardNumber;
+    @Column(name = "pin_card")
+    private String pinCard;
 
-    /**
-     * Date the card expires.
-     */
-    @JsonIgnore
-    @Column(name = "date_of_expiration")
-    private Date dateOfExpiration;
+    @Column(name = "pin_code")
+    private String pinCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -40,30 +36,39 @@ public class CardBean {
     @JoinColumn(name = "account_id")
     private AccountBean accountBean;
 
-    /**
-     * Indicates whether the card is still valid.
-     */
-    @Column(name = "is_valid")
-    private boolean isValid;
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public int getCardId() {
         return cardId;
     }
 
-    public int getCardNumber() {
-        return cardNumber;
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
+    public String getPinCard() {
+        return pinCard;
     }
 
-    public Date getDateOfExpiration() {
-        return dateOfExpiration;
+    public void setPinCard(String pinCard) {
+        this.pinCard = pinCard;
     }
 
-    public void setDateOfExpiration(Date dateOfExpiration) {
-        this.dateOfExpiration = dateOfExpiration;
+    public String getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
     }
 
     public CustomerBean getCustomerBean() {
@@ -80,18 +85,5 @@ public class CardBean {
 
     public void setAccountBean(AccountBean accountBean) {
         this.accountBean = accountBean;
-    }
-
-    public boolean isValid() {
-        return isValid;
-    }
-
-    public void setValid(boolean valid) {
-        isValid = valid;
-    }
-
-    @PrePersist
-    void dateOfExpiration() {
-        this.dateOfExpiration = new Date((long)(new Date().getTime()+(3.1556926e10)));
     }
 }

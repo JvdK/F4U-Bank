@@ -33,34 +33,34 @@ public class TransactionCreateService {
 
     @Transactional
     public void doTransaction(TransactionAddCommand command) throws NotFoundException, BadRequestException {
-        if (command.getAmount() < 0) {
-            throw new BadRequestException();
-        }
-        TransactionBean bean = new TransactionBean();
-        AccountBean source = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getSourceId());
-        AccountBean target = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getTargetId());
-
-        if (source == null || target == null) {
-            throw new NotFoundException();
-        }
-
-        source.setAmount(source.getAmount() - command.getAmount());
-        target.setAmount(target.getAmount() + command.getAmount());
-
-        if (command.getCardId() != null) {
-            CardBean card = cardRepository.findOne(command.getCardId());
-            //check if card is not expired or is not valid
-            if (!card.isValid() || card.getDateOfExpiration().getTime() < new Date().getTime()) {
-                throw new BadRequestException();
-            }
-            bean.setCard(card);
-        }
-        bean.setSourceBean(source);
-        bean.setTargetBean(target);
-        bean.setAmount(command.getAmount());
-        bean.setComment(command.getComment());
-
-        transactionRepository.save(bean);
+//        if (command.getAmount() < 0) {
+//            throw new BadRequestException();
+//        }
+//        TransactionBean bean = new TransactionBean();
+//        AccountBean source = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getSourceId());
+//        AccountBean target = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getTargetId());
+//
+//        if (source == null || target == null) {
+//            throw new NotFoundException();
+//        }
+//
+//        source.setAmount(source.getAmount() - command.getAmount());
+//        target.setAmount(target.getAmount() + command.getAmount());
+//
+//        if (command.getCardId() != null) {
+//            CardBean card = cardRepository.findOne(command.getCardId());
+//            //check if card is not expired or is not valid
+//            if (!card.isValid() || card.getDateOfExpiration().getTime() < new Date().getTime()) {
+//                throw new BadRequestException();
+//            }
+//            bean.setCard(card);
+//        }
+//        bean.setSourceBean(source);
+//        bean.setTargetBean(target);
+//        bean.setAmount(command.getAmount());
+//        bean.setComment(command.getComment());
+//
+//        transactionRepository.save(bean);
 
     }
 

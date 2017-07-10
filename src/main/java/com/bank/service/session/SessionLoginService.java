@@ -1,8 +1,11 @@
 package com.bank.service.session;
 
-import com.bank.bean.session.LoginBean;
-import com.bank.projection.customer.CustomerLoginProjection;
+import com.bank.exception.AuthenticationException;
+import com.bank.projection.session.SessionAuthTokenProjection;
+import com.bank.projection.session.SessionPasswordProjection;
 import com.bank.repository.session.LoginRepository;
+import com.bank.service.AuthenticationService;
+import com.bank.service.customer.CustomerGetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +15,22 @@ public class SessionLoginService {
     @Autowired
     private LoginRepository loginRepository;
 
-    /**
-     * Checks if the given customer name and password correspond. If so the user id is returned.
-     * @param username name of the customer
-     * @param password password of the customer
-     * @return userId of the customer if name and password correspond, -1 if they do not or customer is not active.
-     */
-    public int checkLogin(String username, String password){
-        CustomerLoginProjection bean = loginRepository.findByUserNameAndIsActiveTrue(username);
-        if(bean==null){
-            return -1;
-        }
-        if (bean.getPassword().equals(password)){
-            return bean.getCustomerId();
-        }else{
-            return -1;
+    @Autowired
+    private CustomerGetService customerGetService;
+
+
+    public boolean checkLogin(String username, String password) {
+        SessionPasswordProjection sessionPasswordProjection = loginRepository.findByUsername(username);
+        return sessionPasswordProjection != null && sessionPasswordProjection.getPassword() != null && sessionPasswordProjection.getPassword().equals(password);
+    }
+
+    public SessionAuthTokenProjection getAuthToken(String username, String password) throws AuthenticationException {
+        if (checkLogin(username, password)) {
+            SessionAuthTokenProjection projection = new SessionAuthTokenProjection();
+            projection.setAuthToken(AuthenticationService.instance.login(customerGetService.getCustomerId(username)));
+            return projection;
+        } else {
+            throw new AuthenticationException("Invalid username password combination");
         }
     }
 
