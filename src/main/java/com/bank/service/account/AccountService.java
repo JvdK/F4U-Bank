@@ -26,4 +26,8 @@ public class AccountService {
         return customerAccount != null && customerAccount.isMain();
     }
 
+    public AccountBean getAccountBeanByAccountNumber(String accountNumber){
+        return accountRepository.findAccountBeanByAccountNumber(accountNumber);
+    }
+
 }
