@@ -24,4 +24,12 @@ public class CustomerAccountService {
             throw new NoEffectException("Customer already assigned to this account");
         }
     }
+
+    public void removeCustomerAccount(int customerId, int accountId) throws NoEffectException {
+        if(customerAccountRepository.getFirstByAccountIdAndCustomerId(accountId, customerId) != null){
+            customerAccountRepository.deleteByCustomerIdAndAccountId(customerId, accountId);
+        }else{
+            throw new NoEffectException("Customer not assinged to this account");
+        }
+    }
 }

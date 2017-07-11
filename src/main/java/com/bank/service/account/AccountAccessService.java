@@ -57,4 +57,14 @@ public class AccountAccessService {
     }
 
 
+    public void revokeAccess(int customerId, String accountNumber) throws InvalidParamValueError, NoEffectException {
+        CustomerBean customerBean = customerService.getCustomerBeanById(customerId);
+        AccountBean accountBean = accountService.getAccountBeanByAccountNumber(accountNumber);
+        if (customerBean == null || accountBean == null) {
+            throw new InvalidParamValueError("Invalid account or username");
+        }
+        customerAccountService.removeCustomerAccount(customerId, accountBean.getAccountId());
+    }
+
+
 }

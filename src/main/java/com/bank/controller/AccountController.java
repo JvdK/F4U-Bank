@@ -11,6 +11,7 @@ import com.bank.projection.pin.PinProjection;
 import com.bank.service.AuthenticationService;
 import com.bank.service.account.*;
 import com.bank.service.customer.CustomerCreateService;
+import com.bank.service.customer.CustomerService;
 import com.bank.service.customeraccount.CustomerAccountService;
 import com.googlecode.jsonrpc4j.JsonRpcError;
 import com.googlecode.jsonrpc4j.JsonRpcErrors;
@@ -38,6 +39,9 @@ public class AccountController {
 
     @Autowired
     private AccountAccessService accountAccessService;
+
+    @Autowired
+    private CustomerService customerService;
 
 
     public AccountOpenProjection openAccount(String name,
@@ -82,6 +86,21 @@ public class AccountController {
                 return accountAccessService.provideAccess(IBAN, username);
             }else{
                 throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+    }
+
+    public void revokeAccess(String authToken, String IBAN, String username) throws NotAuthorizedException, InvalidParamValueError, NoEffectException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(username == null){
+                accountAccessService.revokeAccess(customerId, IBAN);
+            }else{
+                if(accountService.checkIfIsMainAccountHolder(IBAN, customerId)){
+                    accountAccessService.revokeAccess(customerService.getCustomerBeanByUsername(username).getCustomerId(), IBAN);
+                }
             }
         } catch (AuthenticationException e) {
             throw new NotAuthorizedException("Not Authorized");
