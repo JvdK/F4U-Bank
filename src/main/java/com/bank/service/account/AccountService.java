@@ -19,11 +19,15 @@ public class AccountService {
 
     public boolean checkIfIsMainAccountHolder(String accountNumber, int customerId) throws InvalidParamValueError {
         AccountBean accountBean = accountRepository.findAccountBeanByAccountNumber(accountNumber);
-        if(accountBean==null){
+        if (accountBean == null) {
             throw new InvalidParamValueError("Unkown account number");
         }
         CustomerAccount customerAccount = customerAccountRepository.getFirstByAccountIdAndCustomerId(accountBean.getAccountId(), customerId);
         return customerAccount != null && customerAccount.isMain();
+    }
+
+    public AccountBean getAccountBeanByAccountNumber(String accountNumber) throws InvalidParamValueError {
+        return accountRepository.findAccountBeanByAccountNumber(accountNumber);
     }
 
 }

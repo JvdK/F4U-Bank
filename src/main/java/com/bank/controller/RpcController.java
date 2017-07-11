@@ -82,12 +82,17 @@ public class RpcController {
     /**
      * Transfer Module
      */
+
+    @Autowired
+    private TransactionController transactionController;
+
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = InvalidPINException.class, code = 421)
     })
-    public Object depositIntoAccount(@JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pincCode") String pinCode, @JsonRpcParam("amount") double amount){
-        return null;
+    public Object depositIntoAccount(@JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount) throws InvalidParamValueError, InvalidPINException {
+        transactionController.depositIntoAccount(IBAN, pinCard, pinCode, amount);
+        return new EmptyJsonResponse();
     }
 
     @JsonRpcErrors({
