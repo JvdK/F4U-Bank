@@ -28,4 +28,8 @@ public class TransactionController {
         transactionCreateService.depositIntoAccount(IBAN, pinCard, pinCode, amount);
     }
 
+    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+        transactionCreateService.payFromAccount(sourceIBAN, targetIBAN, pinCard, pinCode, amount);
+    }
+
 }

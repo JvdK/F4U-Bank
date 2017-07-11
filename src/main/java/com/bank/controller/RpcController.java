@@ -99,8 +99,9 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = InvalidPINException.class, code = 421)
     })
-    public Object payFromAccount(@JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount){
-        return null;
+    public Object payFromAccount(@JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount) throws InvalidParamValueError, InvalidPINException {
+        transactionController.payFromAccount(sourceIBAN, targetIBAN, pinCard, pinCode, amount);
+        return new EmptyJsonResponse();
     }
 
 

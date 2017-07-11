@@ -38,4 +38,13 @@ public class TransactionCreateService {
         transactionService.doSingleTransaction(accountBean, cardBean, amount);
     }
 
+    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+        AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
+        AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
+
+        CardBean cardBean = cardValidateService.validateCard(sourceAccountBean.getAccountId(), pinCard, pinCode);
+
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "");
+    }
+
 }
