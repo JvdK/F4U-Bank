@@ -47,4 +47,11 @@ public class TransactionCreateService {
         transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "");
     }
 
+    public void transferMoney(String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws InvalidParamValueError {
+        AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
+        AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
+
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, null, description);
+    }
+
 }

@@ -109,8 +109,9 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object transferMoney(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("targetName") String targetName, @JsonRpcParam("amount") double amount, @JsonRpcParam("description") String description){
-        return null;
+    public Object transferMoney(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("targetName") String targetName, @JsonRpcParam("amount") double amount, @JsonRpcParam("description") String description) throws NotAuthorizedException, InvalidParamValueError {
+        transactionController.transferMoney(authToken, sourceIBAN, targetIBAN, targetName, amount, description);
+        return new EmptyJsonResponse();
     }
 
     /**

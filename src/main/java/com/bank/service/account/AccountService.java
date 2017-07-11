@@ -26,6 +26,15 @@ public class AccountService {
         return customerAccount != null && customerAccount.isMain();
     }
 
+    public boolean checkIfAccountHolder(String accountNumber, int customerId) throws InvalidParamValueError {
+        AccountBean accountBean = accountRepository.findAccountBeanByAccountNumber(accountNumber);
+        if (accountBean == null) {
+            throw new InvalidParamValueError("Unknown account number");
+        }
+        CustomerAccount customerAccount = customerAccountRepository.getFirstByAccountIdAndCustomerId(accountBean.getAccountId(), customerId);
+        return customerAccount != null;
+    }
+
     public AccountBean getAccountBeanByAccountNumber(String accountNumber) throws InvalidParamValueError {
         AccountBean bean = accountRepository.findAccountBeanByAccountNumber(accountNumber);
         if (bean == null){
