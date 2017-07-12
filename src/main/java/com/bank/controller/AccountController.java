@@ -24,6 +24,7 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.sql.Date;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class AccountController {
     public AccountOpenProjection openAccount(String name,
                                              String surname,
                                              String initials,
-                                             java.util.Date date,
+                                             Date date,
                                              String ssn,
                                              String address,
                                              String telephoneNumber,

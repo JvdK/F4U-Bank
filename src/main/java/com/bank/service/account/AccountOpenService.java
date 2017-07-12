@@ -8,7 +8,7 @@ import com.bank.service.customer.CustomerCreateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Service
 public class AccountOpenService {
@@ -64,7 +64,7 @@ public class AccountOpenService {
         CardBean cardBean = accountCreateService.createAccount(customerBean.getCustomerId(), true);
 
         AccountOpenProjection projection = new AccountOpenProjection();
-        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
+        projection.setiBAN(cardBean.getAccountBean().getAccountNumber());
         projection.setPinCard(cardBean.getPinCard());
         projection.setPinCode(cardBean.getPinCode());
         return projection;
@@ -73,7 +73,7 @@ public class AccountOpenService {
     public AccountOpenProjection openAdditionalAccount(int customerId){
         CardBean cardBean = accountCreateService.createAccount(customerId, true);
         AccountOpenProjection projection = new AccountOpenProjection();
-        projection.setIBAN(cardBean.getAccountBean().getAccountNumber());
+        projection.setiBAN(cardBean.getAccountBean().getAccountNumber());
         projection.setPinCard(cardBean.getPinCard());
         projection.setPinCode(cardBean.getPinCode());
         return projection;
