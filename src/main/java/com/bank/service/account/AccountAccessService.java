@@ -7,12 +7,16 @@ import com.bank.bean.customeraccount.CustomerAccount;
 import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NoEffectException;
 import com.bank.projection.account.AccountOpenProjection;
+import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
+import com.bank.repository.account.AccountRepository;
 import com.bank.service.card.CardCreateService;
 import com.bank.service.customer.CustomerService;
 import com.bank.service.customeraccount.CustomerAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AccountAccessService {
@@ -29,6 +33,9 @@ public class AccountAccessService {
 
     @Autowired
     private CustomerAccountService customerAccountService;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public PinProjection provideAccess(String accountNumber, String username) throws NoEffectException, InvalidParamValueError {
         CustomerBean customerBean = customerService.getCustomerBeanByUsername(username);
@@ -64,6 +71,10 @@ public class AccountAccessService {
             throw new InvalidParamValueError("Invalid account or username");
         }
         customerAccountService.removeCustomerAccount(customerId, accountBean.getAccountId());
+    }
+
+    public List<CustomerUsernameProjection> getBankAccountAccess(int accountId){
+        return accountRepository.getBankAccountAccess(accountId);
     }
 
 

@@ -8,6 +8,7 @@ import com.bank.exception.NoEffectException;
 import com.bank.exception.NotAuthorizedException;
 import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountOpenProjection;
+import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
 import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
@@ -24,10 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
-//@JsonRpcService("/api")
-//@AutoJsonRpcServiceImpl
+
 public class AccountController {
 
     @Autowired
@@ -126,7 +127,18 @@ public class AccountController {
     }
 
 
-
+    public List<CustomerUsernameProjection> getBankAccountAccess(String authToken, String IBAN) throws InvalidParamValueError, NotAuthorizedException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(accountService.checkIfIsMainAccountHolder(IBAN, customerId)){
+                return accountAccessService.getBankAccountAccess(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId());
+            }else{
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+    }
 
 
 }
