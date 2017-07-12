@@ -144,6 +144,9 @@ public class RpcController {
      * Info Module
      */
 
+    @Autowired
+    private CustomerController customerController;
+
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
@@ -164,8 +167,8 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getUserAcces(@JsonRpcParam("authToken") String authToken){
-        return null;
+    public Object getUserAccess(@JsonRpcParam("authToken") String authToken) throws NotAuthorizedException {
+        return customerController.getUserAccess(authToken);
     }
 
     @JsonRpcErrors({
