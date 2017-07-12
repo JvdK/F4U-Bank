@@ -1,7 +1,6 @@
 package com.bank.projection.customer;
 
 public class CustomerUsernameProjection {
-
     private String username;
 
     public CustomerUsernameProjection(String username) {

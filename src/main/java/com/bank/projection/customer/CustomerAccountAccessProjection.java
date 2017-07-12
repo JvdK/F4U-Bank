@@ -3,22 +3,21 @@ package com.bank.projection.customer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CustomerAccountAccessProjection {
-
-    private String IBAN;
+    private String iBAN;
     private String owner;
 
-    public CustomerAccountAccessProjection(String IBAN, String owner) {
-        this.IBAN = IBAN;
+    public CustomerAccountAccessProjection(String iBAN, String owner) {
+        this.iBAN = iBAN;
         this.owner = owner;
     }
 
-    @JsonProperty("IBAN")
+    @JsonProperty("iBAN")
     public String getIBAN() {
-        return IBAN;
+        return iBAN;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
+    public void setIBAN(String iBAN) {
+        this.iBAN = iBAN;
     }
 
     public String getOwner() {

@@ -3,7 +3,7 @@ package com.bank.service.transaction;
 import com.bank.bean.account.AccountBean;
 import com.bank.bean.card.CardBean;
 import com.bank.exception.InvalidPINException;
-import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.InvalidParamValueException;
 import com.bank.service.account.AccountService;
 import com.bank.service.card.CardValidateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ public class TransactionCreateService {
     @Autowired
     private TransactionService transactionService;
 
-    public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidPINException, InvalidParamValueError {
+    public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidPINException, InvalidParamValueException {
         AccountBean accountBean = accountService.getAccountBeanByAccountNumber(IBAN);
         CardBean cardBean = cardValidateService.validateCard(accountBean.getAccountId(), pinCard, pinCode);
         transactionService.doSingleTransaction(accountBean, cardBean, amount);
     }
 
-    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueException, InvalidPINException {
         AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
         AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
 
@@ -36,7 +36,7 @@ public class TransactionCreateService {
         transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "", "");
     }
 
-    public void transferMoney(String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws InvalidParamValueError {
+    public void transferMoney(String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws InvalidParamValueException {
         AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
         AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
 

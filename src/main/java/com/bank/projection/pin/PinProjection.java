@@ -1,7 +1,6 @@
 package com.bank.projection.pin;
 
 public class PinProjection {
-
     private String pinCard;
     private String pinCode;
 

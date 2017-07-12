@@ -3,8 +3,6 @@ package com.bank.projection.transaction;
 import java.util.Date;
 
 public class TransactionProjection {
-
-
     private String sourceIBAN;
     private String targetIBAN;
     private String targetName;
@@ -68,6 +66,4 @@ public class TransactionProjection {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 }

@@ -11,12 +11,10 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CustomerAccountRepository extends CrudRepository<CustomerAccount, Integer> {
-
     @Query("select a from CustomerAccount a where a.customerId = ?1 and a.accountBean.isActive = true")
     List<CustomerAccount> getActiveCustomerAcounts(int customerId);
 
     CustomerAccount getFirstByAccountIdAndCustomerId(int accountId, int customerId);
 
     void deleteByCustomerIdAndAccountId(int customerId, int accountId);
-
 }

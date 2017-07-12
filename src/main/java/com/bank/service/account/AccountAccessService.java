@@ -4,7 +4,7 @@ import com.bank.bean.account.AccountBean;
 import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.CustomerBean;
 import com.bank.bean.customeraccount.CustomerAccount;
-import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.InvalidParamValueException;
 import com.bank.exception.NoEffectException;
 import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
@@ -19,8 +19,6 @@ import java.util.List;
 
 @Service
 public class AccountAccessService {
-
-
     @Autowired
     private CardCreateService cardCreateService;
 
@@ -36,11 +34,11 @@ public class AccountAccessService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public PinProjection provideAccess(String accountNumber, String username) throws NoEffectException, InvalidParamValueError {
+    public PinProjection provideAccess(String accountNumber, String username) throws NoEffectException, InvalidParamValueException {
         CustomerBean customerBean = customerService.getCustomerBeanByUsername(username);
         AccountBean accountBean = accountService.getAccountBeanByAccountNumber(accountNumber);
         if (customerBean == null || accountBean == null) {
-            throw new InvalidParamValueError("Invalid account or username");
+            throw new InvalidParamValueException("Invalid account or username");
         }
 
         // link customer to account
@@ -62,19 +60,16 @@ public class AccountAccessService {
         return pinProjection;
     }
 
-
-    public void revokeAccess(int customerId, String accountNumber) throws InvalidParamValueError, NoEffectException {
+    public void revokeAccess(int customerId, String accountNumber) throws InvalidParamValueException, NoEffectException {
         CustomerBean customerBean = customerService.getCustomerBeanById(customerId);
         AccountBean accountBean = accountService.getAccountBeanByAccountNumber(accountNumber);
         if (customerBean == null || accountBean == null) {
-            throw new InvalidParamValueError("Invalid account or username");
+            throw new InvalidParamValueException("Invalid account or username");
         }
         customerAccountService.removeCustomerAccount(customerId, accountBean.getAccountId());
     }
 
-    public List<CustomerUsernameProjection> getBankAccountAccess(int accountId){
+    public List<CustomerUsernameProjection> getBankAccountAccess(int accountId) {
         return accountRepository.getBankAccountAccess(accountId);
     }
-
-
 }

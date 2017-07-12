@@ -1,7 +1,6 @@
 package com.bank.projection.account;
 
 public class AccountAmountProjection {
-
     private double balance;
 
     public double getBalance() {

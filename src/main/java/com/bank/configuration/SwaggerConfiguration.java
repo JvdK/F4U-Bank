@@ -23,14 +23,13 @@ public class SwaggerConfiguration {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
-                .useDefaultResponseMessages(false) ;
+                .useDefaultResponseMessages(false);
     }
-
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
                 "F4UBank Rest Documentation",
-                "Documention of the F4UBank Rest backend",
+                "Documentation of the F4UBank Rest backend",
                 "",
                 "",
                 "",

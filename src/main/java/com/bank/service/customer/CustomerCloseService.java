@@ -9,12 +9,10 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class CustomerCloseService {
-
     @Autowired
     private CustomerRepository customerRepository;
 
-    public void closeCustomer(int customerId){
+    public void closeCustomer(int customerId) {
         customerRepository.closeCustomer(customerId);
     }
-
 }

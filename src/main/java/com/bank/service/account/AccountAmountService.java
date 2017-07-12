@@ -8,15 +8,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountAmountService {
-
     @Autowired
     private AccountRepository accountRepository;
 
-    public AccountAmountProjection getBalance(int accountId){
+    public AccountAmountProjection getBalance(int accountId) {
         AccountBean accountBean = accountRepository.findAccountBeansByAccountId(accountId);
         AccountAmountProjection projection = new AccountAmountProjection();
         projection.setBalance(accountBean.getAmount());
         return projection;
     }
-
 }

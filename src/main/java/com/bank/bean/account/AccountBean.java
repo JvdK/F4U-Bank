@@ -2,6 +2,7 @@ package com.bank.bean.account;
 
 import com.bank.bean.customeraccount.CustomerAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -84,6 +85,4 @@ public class AccountBean {
     public void setCustomers(List<CustomerAccount> customers) {
         this.customers = customers;
     }
-
-
 }
