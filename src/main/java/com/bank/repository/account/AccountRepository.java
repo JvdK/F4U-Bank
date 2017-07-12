@@ -17,6 +17,8 @@ public interface AccountRepository extends CrudRepository<AccountBean, Integer> 
 
     AccountBean findAccountBeanByAccountNumber(String accountNumber);
 
+    AccountBean findAccountBeansByAccountId(int accountId);
+
     @Modifying
     @Query("update AccountBean a set a.isActive = false where a.accountNumber = ?1")
     void closeAccount(String IBAN);

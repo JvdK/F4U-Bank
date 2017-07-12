@@ -1,12 +1,10 @@
 package com.bank.service.account;
 
+import com.bank.bean.account.AccountBean;
 import com.bank.projection.account.AccountAmountProjection;
-import com.bank.repository.account.AccountAmountRepository;
 import com.bank.repository.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 public class AccountAmountService {
@@ -14,14 +12,11 @@ public class AccountAmountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Transactional
-    public void updateAmount(int sourceAccountId, int targetAccountId, double amount){
-        accountRepository.updateAmount(sourceAccountId, -amount);
-        accountRepository.updateAmount(targetAccountId, amount);
-    }
-
-    public void updateAmount(int targetAccountId, double amount){
-        accountRepository.updateAmount(targetAccountId, amount);
+    public AccountAmountProjection getBalance(int accountId){
+        AccountBean accountBean = accountRepository.findAccountBeansByAccountId(accountId);
+        AccountAmountProjection projection = new AccountAmountProjection();
+        projection.setBalance(accountBean.getAmount());
+        return projection;
     }
 
 }

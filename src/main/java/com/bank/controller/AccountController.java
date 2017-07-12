@@ -6,6 +6,7 @@ import com.bank.exception.AuthenticationException;
 import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NoEffectException;
 import com.bank.exception.NotAuthorizedException;
+import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountOpenProjection;
 import com.bank.projection.pin.PinProjection;
 import com.bank.service.AuthenticationService;
@@ -42,6 +43,9 @@ public class AccountController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private AccountAmountService accountAmountService;
 
 
     public AccountOpenProjection openAccount(String name,
@@ -106,5 +110,19 @@ public class AccountController {
             throw new NotAuthorizedException("Not Authorized");
         }
     }
+
+    public AccountAmountProjection getBalance(String authToken, String IBAN) throws NotAuthorizedException, InvalidParamValueError {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(accountService.checkIfAccountHolder(IBAN, customerId)){
+                return accountAmountService.getBalance(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId());
+            }else{
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+    }
+
 
 }
