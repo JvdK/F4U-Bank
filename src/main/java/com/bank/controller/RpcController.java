@@ -156,8 +156,8 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getTransactionsOverview(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("nrOfTransactions") int nrOfTransactions){
-        return null;
+    public Object getTransactionsOverview(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("nrOfTransactions") int nrOfTransactions) throws InvalidParamValueError, NotAuthorizedException {
+        return transactionController.getTransactionsOverview(authToken, IBAN, nrOfTransactions);
     }
 
     @JsonRpcErrors({

@@ -19,10 +19,10 @@ public class TransactionService {
     private AccountUpdateAmountService accountUpdateAmountService;
 
     public void doTransaction(AccountBean sourceAccountBean, AccountBean targetAccountBean, double amount) throws InvalidParamValueError {
-        doTransaction(sourceAccountBean, targetAccountBean, amount, null, "");
+        doTransaction(sourceAccountBean, targetAccountBean, amount, null, "", "");
     }
 
-    public void doTransaction(AccountBean sourceAccountBean, AccountBean targetAccountBean, double amount, CardBean card, String description) throws InvalidParamValueError {
+    public void doTransaction(AccountBean sourceAccountBean, AccountBean targetAccountBean, double amount, CardBean card, String description, String targetName) throws InvalidParamValueError {
         if(amount <= 0){
             throw new InvalidParamValueError("Invalid Amount");
         }
@@ -30,6 +30,7 @@ public class TransactionService {
         transactionBean.setSourceBean(sourceAccountBean);
         transactionBean.setTargetBean(targetAccountBean);
         transactionBean.setAmount(amount);
+        transactionBean.setTargetName(targetName);
 
         transactionBean.setCard(card);
         transactionBean.setComment(description);
