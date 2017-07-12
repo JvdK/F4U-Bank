@@ -38,9 +38,10 @@ public class AccountService {
 
     public AccountBean getAccountBeanByAccountNumber(String accountNumber) throws InvalidParamValueError {
         AccountBean bean = accountRepository.findAccountBeanByAccountNumber(accountNumber);
-        if (bean == null){
+        if (bean == null) {
             throw new InvalidParamValueError("Unknown account number");
         }
         return bean;
+    }
 
 }

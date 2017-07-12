@@ -6,8 +6,11 @@ import com.bank.exception.AuthenticationException;
 import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NoEffectException;
 import com.bank.exception.NotAuthorizedException;
+import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountOpenProjection;
+import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
+import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
 import com.bank.service.account.*;
 import com.bank.service.customer.CustomerCreateService;
@@ -22,10 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
-//@JsonRpcService("/api")
-//@AutoJsonRpcServiceImpl
+
 public class AccountController {
 
     @Autowired
@@ -42,6 +45,9 @@ public class AccountController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private AccountAmountService accountAmountService;
 
 
     public AccountOpenProjection openAccount(String name,
@@ -106,5 +112,33 @@ public class AccountController {
             throw new NotAuthorizedException("Not Authorized");
         }
     }
+
+    public AccountAmountProjection getBalance(String authToken, String IBAN) throws NotAuthorizedException, InvalidParamValueError {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(accountService.checkIfAccountHolder(IBAN, customerId)){
+                return accountAmountService.getBalance(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId());
+            }else{
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+    }
+
+
+    public List<CustomerUsernameProjection> getBankAccountAccess(String authToken, String IBAN) throws InvalidParamValueError, NotAuthorizedException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(accountService.checkIfIsMainAccountHolder(IBAN, customerId)){
+                return accountAccessService.getBankAccountAccess(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId());
+            }else{
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+    }
+
 
 }

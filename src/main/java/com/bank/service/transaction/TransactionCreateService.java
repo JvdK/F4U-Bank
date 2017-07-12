@@ -44,14 +44,14 @@ public class TransactionCreateService {
 
         CardBean cardBean = cardValidateService.validateCard(sourceAccountBean.getAccountId(), pinCard, pinCode);
 
-        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "");
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "", "");
     }
 
     public void transferMoney(String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws InvalidParamValueError {
         AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
         AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
 
-        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, null, description);
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, null, description, targetName);
     }
 
 }

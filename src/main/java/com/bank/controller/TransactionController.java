@@ -4,10 +4,12 @@ import com.bank.bean.customer.CustomerBean;
 import com.bank.command.transaction.TransactionAddCommand;
 import com.bank.exception.*;
 import com.bank.projection.transaction.TransactionInformationProjection;
+import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
 import com.bank.service.account.AccountService;
 import com.bank.service.transaction.TransactionGetService;
 import com.bank.service.transaction.TransactionCreateService;
+import com.bank.service.transaction.TransactionOverviewService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -26,6 +28,9 @@ public class TransactionController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private TransactionOverviewService transactionOverviewService;
 
     public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
         transactionCreateService.depositIntoAccount(IBAN, pinCard, pinCode, amount);
@@ -46,6 +51,20 @@ public class TransactionController {
         } catch (AuthenticationException e) {
             throw new NotAuthorizedException("Not Authorized");
         }
+    }
+
+    public List<TransactionProjection> getTransactionsOverview(String authToken, String IBAN, int nrOfTransactions) throws InvalidParamValueError, NotAuthorizedException {
+        try {
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            if(accountService.checkIfAccountHolder(IBAN, customerId)){
+                return transactionOverviewService.getTransactionOverview(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId(), nrOfTransactions);
+            }else{
+                throw new NotAuthorizedException("Not Authorized");
+            }
+        } catch (AuthenticationException e) {
+            throw new NotAuthorizedException("Not Authorized");
+        }
+
     }
 
 }

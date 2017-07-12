@@ -144,36 +144,39 @@ public class RpcController {
      * Info Module
      */
 
+    @Autowired
+    private CustomerController customerController;
+
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getBalance(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN){
-        return null;
+    public Object getBalance(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN) throws NotAuthorizedException, InvalidParamValueError {
+        return accountController.getBalance(authToken, IBAN);
     }
 
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getTransactionsOverview(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("nrOfTransactions") int nrOfTransactions){
-        return null;
+    public Object getTransactionsOverview(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("nrOfTransactions") int nrOfTransactions) throws InvalidParamValueError, NotAuthorizedException {
+        return transactionController.getTransactionsOverview(authToken, IBAN, nrOfTransactions);
     }
 
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getUserAcces(@JsonRpcParam("authToken") String authToken){
-        return null;
+    public Object getUserAccess(@JsonRpcParam("authToken") String authToken) throws NotAuthorizedException {
+        return customerController.getUserAccess(authToken);
     }
 
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object getBankAccountAcces(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN){
-        return null;
+    public Object getBankAccountAccess(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN) throws InvalidParamValueError, NotAuthorizedException {
+        return accountController.getBankAccountAccess(authToken, IBAN);
     }
 
 
