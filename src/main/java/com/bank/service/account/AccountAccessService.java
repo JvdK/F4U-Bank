@@ -6,7 +6,6 @@ import com.bank.bean.customer.CustomerBean;
 import com.bank.bean.customeraccount.CustomerAccount;
 import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NoEffectException;
-import com.bank.projection.account.AccountOpenProjection;
 import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
 import com.bank.repository.account.AccountRepository;

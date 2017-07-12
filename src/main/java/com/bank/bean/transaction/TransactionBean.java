@@ -3,8 +3,6 @@ package com.bank.bean.transaction;
 import com.bank.bean.card.CardBean;
 import com.bank.bean.account.AccountBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
 import java.sql.Date;
 
