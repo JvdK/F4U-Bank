@@ -3,8 +3,6 @@ package com.bank.service.card;
 import com.bank.bean.account.AccountBean;
 import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.CustomerBean;
-import com.bank.command.card.CardAddCommand;
-import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.card.CardRepository;
 import com.bank.repository.customer.CustomerRepository;

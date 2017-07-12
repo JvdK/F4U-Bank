@@ -3,9 +3,7 @@ package com.bank.bean.card;
 import com.bank.bean.account.AccountBean;
 import com.bank.bean.customer.CustomerBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "card")

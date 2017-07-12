@@ -1,7 +1,5 @@
 package com.bank.projection.transaction;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.util.Date;
 
 public class TransactionProjection {

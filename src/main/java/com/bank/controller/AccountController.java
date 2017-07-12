@@ -1,7 +1,5 @@
 package com.bank.controller;
 
-import com.bank.bean.card.CardBean;
-import com.bank.bean.customer.CustomerBean;
 import com.bank.exception.AuthenticationException;
 import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NoEffectException;
@@ -10,26 +8,15 @@ import com.bank.projection.account.AccountAmountProjection;
 import com.bank.projection.account.AccountOpenProjection;
 import com.bank.projection.customer.CustomerUsernameProjection;
 import com.bank.projection.pin.PinProjection;
-import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
 import com.bank.service.account.*;
-import com.bank.service.customer.CustomerCreateService;
 import com.bank.service.customer.CustomerService;
-import com.bank.service.customeraccount.CustomerAccountService;
-import com.googlecode.jsonrpc4j.JsonRpcError;
-import com.googlecode.jsonrpc4j.JsonRpcErrors;
-import com.googlecode.jsonrpc4j.JsonRpcParam;
-import com.googlecode.jsonrpc4j.JsonRpcService;
-import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.sql.Date;
 import java.util.List;
 
 @Service
-
 public class AccountController {
 
     @Autowired

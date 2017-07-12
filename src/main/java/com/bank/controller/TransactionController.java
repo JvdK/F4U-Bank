@@ -1,22 +1,16 @@
 package com.bank.controller;
 
-import com.bank.bean.customer.CustomerBean;
-import com.bank.command.transaction.TransactionAddCommand;
-import com.bank.exception.*;
-import com.bank.projection.transaction.TransactionInformationProjection;
+import com.bank.exception.AuthenticationException;
+import com.bank.exception.InvalidPINException;
+import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.NotAuthorizedException;
 import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
 import com.bank.service.account.AccountService;
-import com.bank.service.transaction.TransactionGetService;
 import com.bank.service.transaction.TransactionCreateService;
 import com.bank.service.transaction.TransactionOverviewService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

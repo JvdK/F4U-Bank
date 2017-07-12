@@ -1,7 +1,6 @@
 package com.bank.repository.customeraccount;
 
 import com.bank.bean.customeraccount.CustomerAccount;
-import com.bank.projection.account.AccountCustomerDetailsProjection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -2,10 +2,7 @@ package com.bank.service.account;
 
 import com.bank.bean.account.AccountBean;
 import com.bank.bean.card.CardBean;
-import com.bank.bean.customer.CustomerBean;
 import com.bank.bean.customeraccount.CustomerAccount;
-import com.bank.command.account.AccountCreateCommand;
-import com.bank.exception.BadRequestException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.customeraccount.CustomerAccountRepository;
 import com.bank.service.IBANGeneratorService;
@@ -14,17 +11,11 @@ import com.bank.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class AccountCreateService {
 
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public AccountCreateService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountRepository accountRepository;
 
     @Autowired
     private IBANGeneratorService ibanGeneratorService;
@@ -41,7 +32,6 @@ public class AccountCreateService {
     /**
      * Creates a new account and links it to the given customerAccount. It also creates a new pin and assings it.
      * @param isMain
-     * @throws BadRequestException
      */
     public CardBean createAccount(int customerId, boolean isMain) {
         AccountBean accountBean = new AccountBean();
