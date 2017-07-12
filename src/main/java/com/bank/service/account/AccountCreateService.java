@@ -60,17 +60,4 @@ public class AccountCreateService {
         return cardCreateService.addCard(customerService.getCustomerBeanById(customerId), accountBean);
     }
 
-    public void createAccount(String name,
-                              String surname,
-                              String initials,
-                              Date date,
-                              String ssn,
-                              String address,
-                              String telephoneNumber,
-                              String email,
-                              String username,
-                              String password) {
-
-
-    }
 }

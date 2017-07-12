@@ -18,4 +18,6 @@ public interface CustomerAccountRepository extends CrudRepository<CustomerAccoun
 
     CustomerAccount getFirstByAccountIdAndCustomerId(int accountId, int customerId);
 
+    void deleteByCustomerIdAndAccountId(int customerId, int accountId);
+
 }

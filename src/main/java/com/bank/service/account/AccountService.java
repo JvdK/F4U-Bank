@@ -26,6 +26,7 @@ public class AccountService {
         return customerAccount != null && customerAccount.isMain();
     }
 
+
     public boolean checkIfAccountHolder(String accountNumber, int customerId) throws InvalidParamValueError {
         AccountBean accountBean = accountRepository.findAccountBeanByAccountNumber(accountNumber);
         if (accountBean == null) {
@@ -41,6 +42,5 @@ public class AccountService {
             throw new InvalidParamValueError("Unknown account number");
         }
         return bean;
-    }
 
 }

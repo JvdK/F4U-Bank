@@ -14,6 +14,8 @@ public interface CustomerRepository extends CrudRepository<CustomerBean, Integer
 
     CustomerBean getCustomerBeanByCustomerId(int customerId);
 
+    CustomerBean getCustomerBeanByUsername(String username);
+
     @Modifying
     @Query("update CustomerBean c set c.isActive = false where c.customerId = ?1")
     void closeCustomer(int customerId);

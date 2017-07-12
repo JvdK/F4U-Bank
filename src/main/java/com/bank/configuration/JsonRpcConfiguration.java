@@ -10,6 +10,7 @@ public class JsonRpcConfiguration {
     public static AutoJsonRpcServiceImplExporter autoJsonRpcServiceImplExporter() {
         AutoJsonRpcServiceImplExporter exp = new AutoJsonRpcServiceImplExporter();
         exp.setAllowLessParams(false);
+        exp.setAllowExtraParams(false);
 
         return exp;
     }

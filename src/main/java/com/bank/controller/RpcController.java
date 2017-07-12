@@ -66,8 +66,8 @@ public class RpcController {
             @JsonRpcError(exception = NotAuthorizedException.class, code = 418),
             @JsonRpcError(exception = NoEffectException.class, code = 420)
     })
-    public Object provideAcces(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("username") String username){
-        return null;
+    public Object provideAccess(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("username") String username) throws NotAuthorizedException, InvalidParamValueError, NoEffectException {
+        return accountController.provideAccess(authToken, IBAN, username);
     }
 
     @JsonRpcErrors({
@@ -75,8 +75,19 @@ public class RpcController {
             @JsonRpcError(exception = NotAuthorizedException.class, code = 418),
             @JsonRpcError(exception = NoEffectException.class, code = 420)
     })
-    public Object revokeAccess(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("username") String username){
-        return null;
+    public Object revokeAccess(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("username") String username) throws NotAuthorizedException, InvalidParamValueError, NoEffectException {
+        accountController.revokeAccess(authToken, IBAN, username);
+        return new EmptyJsonResponse();
+    }
+
+    @JsonRpcErrors({
+            @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
+            @JsonRpcError(exception = NotAuthorizedException.class, code = 418),
+            @JsonRpcError(exception = NoEffectException.class, code = 420)
+    })
+    public Object revokeAccess(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("IBAN") String IBAN) throws NotAuthorizedException, InvalidParamValueError, NoEffectException {
+        accountController.revokeAccess(authToken, IBAN, null);
+        return new EmptyJsonResponse();
     }
 
     /**
