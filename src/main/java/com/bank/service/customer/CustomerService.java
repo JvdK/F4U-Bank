@@ -15,4 +15,8 @@ public class CustomerService {
         return customerRepository.getCustomerBeanByCustomerId(customerId);
     }
 
+    public CustomerBean getCustomerBeanByUsername(String username){
+        return customerRepository.getCustomerBeanByUsername(username);
+    }
+
 }
