@@ -5,11 +5,15 @@ import com.bank.bean.account.AccountBean;
 import com.bank.bean.transaction.TransactionBean;
 import com.bank.command.transaction.TransactionAddCommand;
 import com.bank.exception.BadRequestException;
+import com.bank.exception.InvalidPINException;
+import com.bank.exception.InvalidParamValueError;
 import com.bank.exception.NotFoundException;
 import com.bank.repository.account.AccountRepository;
 import com.bank.repository.card.CardRepository;
 import com.bank.repository.customer.CustomerRepository;
 import com.bank.repository.transaction.TransactionRepository;
+import com.bank.service.account.AccountService;
+import com.bank.service.card.CardValidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,48 +24,34 @@ import java.util.Date;
 public class TransactionCreateService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private AccountService accountService;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private CardValidateService cardValidateService;
 
     @Autowired
-    private CardRepository cardRepository;
+    private TransactionService transactionService;
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidPINException, InvalidParamValueError {
+        AccountBean accountBean = accountService.getAccountBeanByAccountNumber(IBAN);
+        CardBean cardBean = cardValidateService.validateCard(accountBean.getAccountId(), pinCard, pinCode);
+        transactionService.doSingleTransaction(accountBean, cardBean, amount);
+    }
 
-    @Transactional
-    public void doTransaction(TransactionAddCommand command) throws NotFoundException, BadRequestException {
-//        if (command.getAmount() < 0) {
-//            throw new BadRequestException();
-//        }
-//        TransactionBean bean = new TransactionBean();
-//        AccountBean source = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getSourceId());
-//        AccountBean target = accountRepository.findAccountBeanByAccountIdAndIsActiveTrue(command.getTargetId());
-//
-//        if (source == null || target == null) {
-//            throw new NotFoundException();
-//        }
-//
-//        source.setAmount(source.getAmount() - command.getAmount());
-//        target.setAmount(target.getAmount() + command.getAmount());
-//
-//        if (command.getCardId() != null) {
-//            CardBean card = cardRepository.findOne(command.getCardId());
-//            //check if card is not expired or is not valid
-//            if (!card.isValid() || card.getDateOfExpiration().getTime() < new Date().getTime()) {
-//                throw new BadRequestException();
-//            }
-//            bean.setCard(card);
-//        }
-//        bean.setSourceBean(source);
-//        bean.setTargetBean(target);
-//        bean.setAmount(command.getAmount());
-//        bean.setComment(command.getComment());
-//
-//        transactionRepository.save(bean);
+    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+        AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
+        AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
 
+        CardBean cardBean = cardValidateService.validateCard(sourceAccountBean.getAccountId(), pinCard, pinCode);
+
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, cardBean, "");
+    }
+
+    public void transferMoney(String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws InvalidParamValueError {
+        AccountBean sourceAccountBean = accountService.getAccountBeanByAccountNumber(sourceIBAN);
+        AccountBean targetAccountBean = accountService.getAccountBeanByAccountNumber(targetIBAN);
+
+        transactionService.doTransaction(sourceAccountBean, targetAccountBean, amount, null, description);
     }
 
 }

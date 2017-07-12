@@ -20,4 +20,8 @@ public interface AccountRepository extends CrudRepository<AccountBean, Integer> 
     @Modifying
     @Query("update AccountBean a set a.isActive = false where a.accountNumber = ?1")
     void closeAccount(String IBAN);
+
+    @Modifying
+    @Query("update AccountBean a set a.amount = a.amount + ?2 where a.accountId = ?1")
+    void updateAmount(int accountId, double amount);
 }

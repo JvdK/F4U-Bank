@@ -93,20 +93,26 @@ public class RpcController {
     /**
      * Transfer Module
      */
+
+    @Autowired
+    private TransactionController transactionController;
+
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = InvalidPINException.class, code = 421)
     })
-    public Object depositIntoAccount(@JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pincCode") String pinCode, @JsonRpcParam("amount") double amount){
-        return null;
+    public Object depositIntoAccount(@JsonRpcParam("IBAN") String IBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount) throws InvalidParamValueError, InvalidPINException {
+        transactionController.depositIntoAccount(IBAN, pinCard, pinCode, amount);
+        return new EmptyJsonResponse();
     }
 
     @JsonRpcErrors({
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = InvalidPINException.class, code = 421)
     })
-    public Object payFromAccount(@JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount){
-        return null;
+    public Object payFromAccount(@JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("pinCard") String pinCard, @JsonRpcParam("pinCode") String pinCode, @JsonRpcParam("amount") double amount) throws InvalidParamValueError, InvalidPINException {
+        transactionController.payFromAccount(sourceIBAN, targetIBAN, pinCard, pinCode, amount);
+        return new EmptyJsonResponse();
     }
 
 
@@ -114,8 +120,9 @@ public class RpcController {
             @JsonRpcError(exception = InvalidParamValueError.class, code = 418),
             @JsonRpcError(exception = NotAuthorizedException.class, code = 419)
     })
-    public Object transferMoney(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("targetName") String targetName, @JsonRpcParam("amount") double amount, @JsonRpcParam("description") String description){
-        return null;
+    public Object transferMoney(@JsonRpcParam("authToken") String authToken, @JsonRpcParam("sourceIBAN") String sourceIBAN, @JsonRpcParam("targetIBAN") String targetIBAN, @JsonRpcParam("targetName") String targetName, @JsonRpcParam("amount") double amount, @JsonRpcParam("description") String description) throws NotAuthorizedException, InvalidParamValueError {
+        transactionController.transferMoney(authToken, sourceIBAN, targetIBAN, targetName, amount, description);
+        return new EmptyJsonResponse();
     }
 
     /**

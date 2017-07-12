@@ -24,11 +24,11 @@ public class TransactionBean {
     private double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "source_account_id", nullable = false)
+    @JoinColumn(name = "source_account_id")
     private AccountBean sourceBean;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_account_id", nullable = false)
+    @JoinColumn(name = "target_account_id")
     private AccountBean targetBean;
 
     @ManyToOne(fetch = FetchType.LAZY)
