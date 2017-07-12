@@ -3,6 +3,7 @@ package com.bank.bean.transaction;
 import com.bank.bean.card.CardBean;
 import com.bank.bean.account.AccountBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -10,7 +11,7 @@ import java.sql.Date;
 @Table(name = "transaction")
 public class TransactionBean {
     /**
-     * Internal transaction id.
+     * Internal transaction id, unique identifier.
      */
     @Id
     @Column(name = "transaction_id")
@@ -35,7 +36,7 @@ public class TransactionBean {
     @JoinColumn(name = "card_id")
     private CardBean card;
 
-    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date date;
 
     @Column(name = "target_name")

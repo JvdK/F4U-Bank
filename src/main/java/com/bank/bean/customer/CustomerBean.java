@@ -1,14 +1,15 @@
 package com.bank.bean.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * The Customer class contains all relevant data field for a customer.
+ * The Customer class contains all relevant data values related to a customer.
  */
 @Entity
-@Table(name = "customer", uniqueConstraints= @UniqueConstraint(columnNames={"user_name"}))
+@Table(name = "customer", uniqueConstraints = @UniqueConstraint(columnNames = {"user_name"}))
 public class CustomerBean {
     /**
      * Internal customer id.

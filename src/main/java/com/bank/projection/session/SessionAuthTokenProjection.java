@@ -1,7 +1,6 @@
 package com.bank.projection.session;
 
 public class SessionAuthTokenProjection {
-
     private String AuthToken;
 
     public String getAuthToken() {

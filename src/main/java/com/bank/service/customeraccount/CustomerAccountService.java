@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerAccountService {
-
     @Autowired
     CustomerAccountRepository customerAccountRepository;
 
@@ -24,7 +23,7 @@ public class CustomerAccountService {
         if(customerAccountRepository.getFirstByAccountIdAndCustomerId(accountId, customerId) != null){
             customerAccountRepository.deleteByCustomerIdAndAccountId(customerId, accountId);
         }else{
-            throw new NoEffectException("Customer not assinged to this account");
+            throw new NoEffectException("Customer not assigned to this account");
         }
     }
 }

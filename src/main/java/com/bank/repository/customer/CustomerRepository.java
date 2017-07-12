@@ -11,8 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<CustomerBean, Integer> {
-
-
     CustomerBean getCustomerBeanByCustomerId(int customerId);
 
     CustomerBean getCustomerBeanByUsername(String username);
@@ -20,8 +18,6 @@ public interface CustomerRepository extends CrudRepository<CustomerBean, Integer
     @Modifying
     @Query("update CustomerBean c set c.isActive = false where c.customerId = ?1")
     void closeCustomer(int customerId);
-
-
 
     @Query("select new com.bank.projection.customer.CustomerAccountAccessProjection(account.accountNumber, customer.username) " +
             "from CustomerBean customer, CustomerAccount customeraccount, CustomerAccount main, AccountBean account " +
@@ -31,5 +27,4 @@ public interface CustomerRepository extends CrudRepository<CustomerBean, Integer
             "and customeraccount.accountId = account.accountId " +
             "and main.customerId = customer.customerId")
     List<CustomerAccountAccessProjection> getCustomerAccess(int customerId);
-
 }

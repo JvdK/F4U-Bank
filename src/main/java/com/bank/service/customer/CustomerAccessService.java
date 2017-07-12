@@ -9,12 +9,10 @@ import java.util.List;
 
 @Service
 public class CustomerAccessService {
-
     @Autowired
     private CustomerRepository customerRepository;
 
-    public List<CustomerAccountAccessProjection> getUserAccess(int customerId){
+    public List<CustomerAccountAccessProjection> getUserAccess(int customerId) {
         return customerRepository.getCustomerAccess(customerId);
     }
-
 }

@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SessionController {
-
     @Autowired
     private SessionLoginService loginService;
-
 
     @JsonRpcErrors({
             @JsonRpcError(exception = AuthenticationException.class, code = 422)
@@ -22,6 +20,4 @@ public class SessionController {
     public SessionAuthTokenProjection getAuthToken(@JsonRpcParam("username") String username, @JsonRpcParam("password") String password) throws AuthenticationException {
         return loginService.getAuthToken(username, password);
     }
-
-
 }

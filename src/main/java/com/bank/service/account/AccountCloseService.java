@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class AccountCloseService {
-
     @Autowired
     private AccountRepository accountRepository;
 
@@ -25,17 +24,18 @@ public class AccountCloseService {
     @Autowired
     private CustomerCloseService customerCloseService;
 
-    public void closeAccount(String IBAN, int customerId) {
-        accountRepository.closeAccount(IBAN);
-        // invalidate pincards
-        int accountId = accountRepository.findAccountBeanByAccountNumber(IBAN).getAccountId();
+    public void closeAccount(String iBAN, int customerId) {
+        // close account
+        accountRepository.closeAccount(iBAN);
+
+        // invalidate all pin cards
+        int accountId = accountRepository.findAccountBeanByAccountNumber(iBAN).getAccountId();
         cardRepository.invalidatePinCards(accountId);
-        // if last account, invalidate customer account
+
+        // if last account of customer, also invalidate customer
         List<CustomerAccount> customerAccounts = customerAccountRepository.getActiveCustomerAcounts(customerId);
         if (customerAccounts.size() == 0) {
             customerCloseService.closeCustomer(customerId);
         }
-
     }
-
 }

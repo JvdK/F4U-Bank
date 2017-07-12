@@ -8,18 +8,16 @@ import javax.transaction.Transactional;
 
 @Service
 public class AccountUpdateAmountService {
-
     @Autowired
     private AccountRepository accountRepository;
 
     @Transactional
-    public void updateAmount(int sourceAccountId, int targetAccountId, double amount){
+    public void updateAmount(int sourceAccountId, int targetAccountId, double amount) {
         accountRepository.updateAmount(sourceAccountId, -amount);
         accountRepository.updateAmount(targetAccountId, amount);
     }
 
-    public void updateAmount(int targetAccountId, double amount){
+    public void updateAmount(int targetAccountId, double amount) {
         accountRepository.updateAmount(targetAccountId, amount);
     }
-
 }

@@ -2,7 +2,7 @@ package com.bank.service.account;
 
 import com.bank.bean.card.CardBean;
 import com.bank.bean.customer.CustomerBean;
-import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.InvalidParamValueException;
 import com.bank.projection.account.AccountOpenProjection;
 import com.bank.service.customer.CustomerCreateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import java.sql.Date;
 
 @Service
 public class AccountOpenService {
-
-
     @Autowired
     private CustomerCreateService customerCreateService;
 
@@ -21,7 +19,7 @@ public class AccountOpenService {
     private AccountCreateService accountCreateService;
 
     /**
-     * Opens an account. This creates a new customer, new account and a new pin card.
+     * Opens an account. This creates a new customer, a new account and a new pin card.
      *
      * @param name
      * @param surname
@@ -33,8 +31,8 @@ public class AccountOpenService {
      * @param email
      * @param username
      * @param password
-     * @return projection containing the account id and pin number with pin code
-     * @throws InvalidParamValueError when parameters are not correct
+     * @return projection containing the account id, pin number and pin code.
+     * @throws InvalidParamValueException when parameters are not correct.
      */
     public AccountOpenProjection openAccount(String name,
                                              String surname,
@@ -45,7 +43,7 @@ public class AccountOpenService {
                                              String telephoneNumber,
                                              String email,
                                              String username,
-                                             String password) throws InvalidParamValueError {
+                                             String password) throws InvalidParamValueException {
 
         CustomerBean customerBean = new CustomerBean();
         customerBean.setName(name);
@@ -70,7 +68,7 @@ public class AccountOpenService {
         return projection;
     }
 
-    public AccountOpenProjection openAdditionalAccount(int customerId){
+    public AccountOpenProjection openAdditionalAccount(int customerId) {
         CardBean cardBean = accountCreateService.createAccount(customerId, true);
         AccountOpenProjection projection = new AccountOpenProjection();
         projection.setiBAN(cardBean.getAccountBean().getAccountNumber());
@@ -78,5 +76,4 @@ public class AccountOpenService {
         projection.setPinCode(cardBean.getPinCode());
         return projection;
     }
-
 }

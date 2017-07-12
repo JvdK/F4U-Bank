@@ -2,7 +2,7 @@ package com.bank.controller;
 
 import com.bank.exception.AuthenticationException;
 import com.bank.exception.InvalidPINException;
-import com.bank.exception.InvalidParamValueError;
+import com.bank.exception.InvalidParamValueException;
 import com.bank.exception.NotAuthorizedException;
 import com.bank.projection.transaction.TransactionProjection;
 import com.bank.service.AuthenticationService;
@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 public class TransactionController {
-
     @Autowired
     private TransactionCreateService transactionCreateService;
 
@@ -26,20 +25,20 @@ public class TransactionController {
     @Autowired
     private TransactionOverviewService transactionOverviewService;
 
-    public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+    public void depositIntoAccount(String IBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueException, InvalidPINException {
         transactionCreateService.depositIntoAccount(IBAN, pinCard, pinCode, amount);
     }
 
-    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueError, InvalidPINException {
+    public void payFromAccount(String sourceIBAN, String targetIBAN, String pinCard, String pinCode, double amount) throws InvalidParamValueException, InvalidPINException {
         transactionCreateService.payFromAccount(sourceIBAN, targetIBAN, pinCard, pinCode, amount);
     }
 
-    public void transferMoney(String authToken, String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws NotAuthorizedException, InvalidParamValueError {
+    public void transferMoney(String authToken, String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws NotAuthorizedException, InvalidParamValueException {
         try {
             int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
-            if(accountService.checkIfAccountHolder(sourceIBAN, customerId)){
+            if (accountService.checkIfAccountHolder(sourceIBAN, customerId)) {
                 transactionCreateService.transferMoney(sourceIBAN, targetIBAN, targetName, amount, description);
-            }else{
+            } else {
                 throw new NotAuthorizedException("Not Authorized");
             }
         } catch (AuthenticationException e) {
@@ -47,18 +46,16 @@ public class TransactionController {
         }
     }
 
-    public List<TransactionProjection> getTransactionsOverview(String authToken, String IBAN, int nrOfTransactions) throws InvalidParamValueError, NotAuthorizedException {
+    public List<TransactionProjection> getTransactionsOverview(String authToken, String IBAN, int nrOfTransactions) throws InvalidParamValueException, NotAuthorizedException {
         try {
             int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
-            if(accountService.checkIfAccountHolder(IBAN, customerId)){
+            if (accountService.checkIfAccountHolder(IBAN, customerId)) {
                 return transactionOverviewService.getTransactionOverview(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId(), nrOfTransactions);
-            }else{
+            } else {
                 throw new NotAuthorizedException("Not Authorized");
             }
         } catch (AuthenticationException e) {
             throw new NotAuthorizedException("Not Authorized");
         }
-
     }
-
 }

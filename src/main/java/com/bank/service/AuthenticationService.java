@@ -7,7 +7,6 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 
 public final class AuthenticationService {
-
     public static final String USERID = "userId";
 
     public static AuthenticationService instance = new AuthenticationService();
@@ -39,7 +38,7 @@ public final class AuthenticationService {
 
     public final void setObject(String token, String key, Object value) throws AuthenticationException {
         if (isAuthenticated(token)) {
-           map.get(token).put(key, value);
+            map.get(token).put(key, value);
         } else {
             throw new AuthenticationException("Not authorized: setObject");
         }
@@ -56,5 +55,4 @@ public final class AuthenticationService {
             throw new AuthenticationException("Not authorized: getObject");
         }
     }
-
 }

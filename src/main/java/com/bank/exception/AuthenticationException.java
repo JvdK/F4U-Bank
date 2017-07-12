@@ -1,13 +1,9 @@
 package com.bank.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 /**
- * Exception thrown when the authentication has failed.
+ * Exception thrown when the authentication has failed, e.g. wrong username/password combination.
  */
 public class AuthenticationException extends Exception {
-
     public AuthenticationException(String message) {
         super(message);
     }

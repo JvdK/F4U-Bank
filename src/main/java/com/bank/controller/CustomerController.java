@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class CustomerController {
-
     @Autowired
     private CustomerAccessService customerAccessService;
 
@@ -25,5 +24,4 @@ public class CustomerController {
         }
 
     }
-
 }

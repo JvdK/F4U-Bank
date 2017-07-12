@@ -11,13 +11,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SessionLoginService {
-
     @Autowired
     private LoginRepository loginRepository;
 
     @Autowired
     private CustomerGetService customerGetService;
-
 
     public boolean checkLogin(String username, String password) {
         SessionPasswordProjection sessionPasswordProjection = loginRepository.findByUsername(username);
@@ -33,5 +31,4 @@ public class SessionLoginService {
             throw new AuthenticationException("Invalid username password combination");
         }
     }
-
 }

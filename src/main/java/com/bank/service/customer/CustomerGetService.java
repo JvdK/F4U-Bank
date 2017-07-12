@@ -6,12 +6,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerGetService {
-
     @Autowired
     CustomerInformationRepository customerInformationRepository;
 
-
-    public int getCustomerId(String username){
+    public int getCustomerId(String username) {
         return customerInformationRepository.findByUsername(username).getCustomerId();
     }
 }

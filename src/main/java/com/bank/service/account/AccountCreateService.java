@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountCreateService {
-
     @Autowired
     private AccountRepository accountRepository;
 
@@ -30,8 +29,10 @@ public class AccountCreateService {
     private CustomerService customerService;
 
     /**
-     * Creates a new account and links it to the given customerAccount. It also creates a new pin and assings it.
-     * @param isMain
+     * Creates a new account and links it to the given customerAccount. It also creates a new pin and assigns it.
+     *
+     * @param customerId is the customer id.
+     * @param isMain     sets whether the given customerAccount is the main owner.
      */
     public CardBean createAccount(int customerId, boolean isMain) {
         AccountBean accountBean = new AccountBean();
@@ -49,5 +50,4 @@ public class AccountCreateService {
         // create pin
         return cardCreateService.addCard(customerService.getCustomerBeanById(customerId), accountBean);
     }
-
 }

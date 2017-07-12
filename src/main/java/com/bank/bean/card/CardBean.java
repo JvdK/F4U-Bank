@@ -3,8 +3,12 @@ package com.bank.bean.card;
 import com.bank.bean.account.AccountBean;
 import com.bank.bean.customer.CustomerBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
+/**
+ * The Card class contains all data values related to a card.
+ */
 @Entity
 @Table(name = "card")
 public class CardBean {

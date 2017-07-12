@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CardCreateService {
-
     @Autowired
     private CardRepository cardRepository;
 
@@ -23,11 +22,12 @@ public class CardCreateService {
     @Autowired
     private AccountRepository accountRepository;
 
-
     /**
-     * Adds a new card to the given account and links it to the given person. The pinCard and pinCode are generated at random
+     * Adds a new card to the given account and links it to the given person.
+     * The pinCard and pinCode are generated at random
+     *
      * @param customerBean the customer
-     * @param accountBean the account
+     * @param accountBean  the account
      * @return The cardBean
      */
     @Transactional
