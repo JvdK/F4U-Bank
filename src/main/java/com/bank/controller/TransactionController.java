@@ -35,7 +35,7 @@ public class TransactionController {
 
     public void transferMoney(String authToken, String sourceIBAN, String targetIBAN, String targetName, double amount, String description) throws NotAuthorizedException, InvalidParamValueException {
         try {
-            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USER_ID);
             if (accountService.checkIfAccountHolder(sourceIBAN, customerId)) {
                 transactionCreateService.transferMoney(sourceIBAN, targetIBAN, targetName, amount, description);
             } else {
@@ -48,7 +48,7 @@ public class TransactionController {
 
     public List<TransactionProjection> getTransactionsOverview(String authToken, String IBAN, int nrOfTransactions) throws InvalidParamValueException, NotAuthorizedException {
         try {
-            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USERID);
+            int customerId = (Integer) AuthenticationService.instance.getObject(authToken, AuthenticationService.USER_ID);
             if (accountService.checkIfAccountHolder(IBAN, customerId)) {
                 return transactionOverviewService.getTransactionOverview(accountService.getAccountBeanByAccountNumber(IBAN).getAccountId(), nrOfTransactions);
             } else {

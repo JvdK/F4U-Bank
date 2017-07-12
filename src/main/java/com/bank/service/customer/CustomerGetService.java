@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerGetService {
     @Autowired
-    CustomerInformationRepository customerInformationRepository;
+    private CustomerInformationRepository customerInformationRepository;
 
     public int getCustomerId(String username) {
         return customerInformationRepository.findByUsername(username).getCustomerId();

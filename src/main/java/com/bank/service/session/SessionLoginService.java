@@ -17,7 +17,7 @@ public class SessionLoginService {
     @Autowired
     private CustomerGetService customerGetService;
 
-    public boolean checkLogin(String username, String password) {
+    private boolean checkLogin(String username, String password) {
         SessionPasswordProjection sessionPasswordProjection = loginRepository.findByUsername(username);
         return sessionPasswordProjection != null && sessionPasswordProjection.getPassword() != null && sessionPasswordProjection.getPassword().equals(password);
     }

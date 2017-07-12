@@ -12,11 +12,11 @@ public class CustomerAccountAccessProjection {
     }
 
     @JsonProperty("iBAN")
-    public String getiBAN() {
+    public String getIBAN() {
         return iBAN;
     }
 
-    public void setiBAN(String iBAN) {
+    public void setIBAN(String iBAN) {
         this.iBAN = iBAN;
     }
 

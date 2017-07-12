@@ -9,20 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerAccountService {
     @Autowired
-    CustomerAccountRepository customerAccountRepository;
+    private CustomerAccountRepository customerAccountRepository;
 
     public void addCustomerAccount(CustomerAccount customerAccount) throws NoEffectException {
-        if(customerAccountRepository.getFirstByAccountIdAndCustomerId(customerAccount.getAccountId(), customerAccount.getCustomerId()) == null){
+        if (customerAccountRepository.getFirstByAccountIdAndCustomerId(customerAccount.getAccountId(), customerAccount.getCustomerId()) == null) {
             customerAccountRepository.save(customerAccount);
-        }else{
+        } else {
             throw new NoEffectException("Customer already assigned to this account");
         }
     }
 
     public void removeCustomerAccount(int customerId, int accountId) throws NoEffectException {
-        if(customerAccountRepository.getFirstByAccountIdAndCustomerId(accountId, customerId) != null){
+        if (customerAccountRepository.getFirstByAccountIdAndCustomerId(accountId, customerId) != null) {
             customerAccountRepository.deleteByCustomerIdAndAccountId(customerId, accountId);
-        }else{
+        } else {
             throw new NoEffectException("Customer not assigned to this account");
         }
     }
