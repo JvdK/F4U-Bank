@@ -2,16 +2,16 @@ package com.bank.projection.account;
 
 public class AccountOpenProjection {
 
-    private String IBAN;
+    private String iBAN;
     private String pinCard;
     private String pinCode;
 
-    public String getIBAN() {
-        return IBAN;
+    public String getiBAN() {
+        return iBAN;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
+    public void setiBAN(String IBAN) {
+        this.iBAN = IBAN;
     }
 
     public String getPinCard() {

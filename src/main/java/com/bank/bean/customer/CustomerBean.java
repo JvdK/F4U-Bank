@@ -2,7 +2,7 @@ package com.bank.bean.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * The Customer class contains all relevant data field for a customer.
